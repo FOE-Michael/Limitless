@@ -34,9 +34,8 @@ body{
 }
 .wrap{max-width:1150px;margin:auto;padding:16px}
 header{padding:26px 0 14px}
-h1{margin:0;font-size:30px;letter-spacing:.2px}
-.subtitle{margin:6px 0 0;color:var(--muted)}
-hr.sep{border:0;border-top:1px solid var(--border2);margin:18px 0}
+h1{margin:0;font-size:30px}
+.subtitle{margin-top:6px;color:var(--muted)}
 
 nav{
   position:sticky;top:0;z-index:50;
@@ -45,8 +44,10 @@ nav{
   border-bottom:1px solid var(--border);
 }
 nav .wrap{
-  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
-  padding:10px 16px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
 }
 nav a{
   padding:8px 12px;
@@ -64,7 +65,6 @@ nav .pill{
   border-radius:999px;
   background:linear-gradient(90deg, rgba(124,58,237,.25), rgba(34,211,238,.18));
   border:1px solid rgba(255,255,255,.14);
-  color:var(--text);
   font-size:13px;
 }
 
@@ -73,90 +73,38 @@ nav .pill{
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:16px;
-  margin-top:14px;
+  margin-top:16px;
   box-shadow:var(--shadow);
 }
-.card h2{margin:0 0 8px;font-size:22px}
-.card h3{margin:14px 0 8px;font-size:16px;color:#fff}
-.card p{margin:8px 0;color:var(--muted);line-height:1.45}
-.card ul{margin:8px 0 0 20px;color:var(--muted);line-height:1.55}
-.small{font-size:13px;color:var(--muted)}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(12, 1fr);
-  gap:14px;
-}
-.col6{grid-column:span 6}
-.col4{grid-column:span 4}
-.col8{grid-column:span 8}
-@media (max-width:900px){
-  .col6,.col4,.col8{grid-column:span 12}
-  nav .pill{margin-left:0;width:100%;text-align:center}
-}
+.card h2{margin:0 0 8px}
+.card h3{margin:14px 0 8px}
+.card p{color:var(--muted);line-height:1.45}
+.card ul{color:var(--muted);line-height:1.55}
 
 .tag{
-  display:inline-flex;align-items:center;gap:6px;
+  display:inline-block;
   padding:4px 10px;
   border-radius:999px;
   font-size:12px;
   border:1px solid var(--border);
   margin-right:6px;
-  background:rgba(255,255,255,.04);
 }
-.found{border-color:rgba(52,211,153,.55)}
-.lead{border-color:rgba(251,191,36,.55)}
-.gbg{border-color:rgba(34,211,238,.55)}
-.good{border-color:rgba(52,211,153,.55)}
-.warn{border-color:rgba(251,191,36,.55)}
-.neutral{border-color:rgba(255,255,255,.18)}
+.found{border-color:#34d399}
+.lead{border-color:#fbbf24}
+.gbg{border-color:#22d3ee}
 
-.callout{
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border2);
-  border-radius:14px;
-  padding:12px;
+table{
+  width:100%;
+  border-collapse:collapse;
   margin-top:10px;
 }
-.callout strong{color:#fff}
-
-table{width:100%;border-collapse:collapse;margin-top:10px;overflow:hidden;border-radius:14px}
 th,td{
-  text-align:left;
   padding:10px;
   border-bottom:1px solid rgba(255,255,255,.08);
-  vertical-align:top;
+  text-align:left;
 }
-thead th{
-  color:#fff;
-  font-weight:600;
-  font-size:13px;
-  background:rgba(255,255,255,.03);
-}
-tbody tr:hover{background:rgba(255,255,255,.03)}
-kbd{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.14);
-  padding:2px 6px;
-  border-radius:8px;
-  font-size:12px;
-  color:#fff;
-}
-details{
-  margin-top:10px;
-  border:1px solid var(--border2);
-  border-radius:14px;
-  padding:10px 12px;
-  background:rgba(255,255,255,.03);
-}
-summary{cursor:pointer;color:#fff}
-code.inline{
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.14);
-  padding:2px 6px;
-  border-radius:8px;
-  color:#fff;
-  font-size:12px;
-}
+thead th{color:#fff}
+
 footer{
   margin-top:40px;
   padding:20px 0;
@@ -185,359 +133,98 @@ footer{
     <a href="#thread19">1.9 Thread</a>
     <a href="#qi">QI</a>
     <a href="#members">Members</a>
-    <span class="pill">✅ Clean • Modern • Mobile-friendly • Easy to update</span>
+
+    <span class="pill">
+      🏆 Competitive · 🤝 Team-Focused · 🌍 International
+    </span>
   </div>
 </nav>
 
 <main class="wrap">
 
-  <div class="card">
-    <h2>Welcome</h2>
-    <p>
-      <strong>Limitless</strong> is an international, competitive, drama-free guild focused on
-      <strong>GBG</strong>, <strong>GE</strong>, and <strong>QI</strong>.
-      Real life comes first — communication matters.
-    </p>
+<div class="card">
+  <h2>Welcome</h2>
+  <p>
+    Limitless is an international, competitive, drama-free guild focused on
+    <strong>GBG</strong>, <strong>GE</strong>, and <strong>QI</strong>.
+    Real life comes first — communication matters.
+  </p>
+</div>
 
-    <div class="grid">
-      <div class="col4">
-        <div class="callout">
-          <strong>Leadership & Roles</strong>
-          <div class="small" style="margin-top:6px">
-            <span class="tag found">👑 Founder</span>
-            <span class="tag lead">⭐ Leader</span>
-            <span class="tag gbg">⚔️ GBG Contact</span>
-          </div>
-          <p class="small" style="margin:8px 0 0">
-            GBG contacts: <strong>Long Shadow</strong>, <strong>KatsuChicken</strong>
-          </p>
-        </div>
-      </div>
+<div class="card" id="rules">
+  <h2>Guild Rules (Simple)</h2>
+  <ul>
+    <li>Be respectful — no drama, no ego.</li>
+    <li>Real life comes first. If you’ll be away, tell leadership.</li>
+    <li>Follow GBG calls and respect locks.</li>
+    <li>Use the 1.9 thread properly.</li>
+  </ul>
+</div>
 
-      <div class="col4">
-        <div class="callout">
-          <strong>Quick Links</strong>
-          <ul style="margin:8px 0 0 20px">
-            <li><a href="#fighting" style="color:#fff">Troop combos</a></li>
-            <li><a href="#attrition" style="color:#fff">Attrition guide</a></li>
-            <li><a href="#thread19" style="color:#fff">1.9 posting templates</a></li>
-          </ul>
-        </div>
-      </div>
+<div class="card" id="gbg">
+  <h2>GBG Playbook</h2>
+  <p>Hit called sectors only. Respect locks. Stop before feeding units.</p>
+  <p><span class="tag gbg">⚔️ GBG Contacts</span> Long Shadow, KatsuChicken</p>
+</div>
 
-      <div class="col4">
-        <div class="callout">
-          <strong>How to stay in good standing</strong>
-          <ul style="margin:8px 0 0 20px">
-            <li>Help in GE weekly</li>
-            <li>Follow GBG calls + locks</li>
-            <li>Use the 1.9 thread properly</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="card" id="fighting">
+  <h2>Fighting Guide (Troop Combos)</h2>
+  <table>
+    <thead>
+      <tr><th>Situation</th><th>Recommended Army</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>General purpose</td><td>2× Fast + 6× Ranged</td><td>Safe auto option</td></tr>
+      <tr><td>Harder fights</td><td>1× Heavy + 7× Ranged</td><td>Heavy absorbs hits</td></tr>
+      <tr><td>Vs artillery</td><td>6–8× Fast</td><td>Close distance fast</td></tr>
+      <tr><td>Vs fast</td><td>6–8× Heavy</td><td>Manual if needed</td></tr>
+    </tbody>
+  </table>
+</div>
 
-  <!-- RULES -->
-  <div class="card" id="rules">
-    <h2>Guild Rules (Simple)</h2>
-    <div class="grid">
-      <div class="col6">
-        <h3>Culture</h3>
-        <ul>
-          <li>Be respectful — no drama, no ego.</li>
-          <li>Real life comes first. If you’ll be away, just tell leadership.</li>
-          <li>Keep chat helpful (questions welcome).</li>
-        </ul>
-      </div>
-      <div class="col6">
-        <h3>Contribution</h3>
-        <ul>
-          <li>GE: hit the weekly target (see GE section).</li>
-          <li>GBG: follow calls and respect locks.</li>
-          <li>1.9 thread: follow the standard process (see templates).</li>
-        </ul>
-      </div>
-    </div>
+<div class="card" id="attrition">
+  <h2>Attrition Guide</h2>
+  <ul>
+    <li>Auto until losses rise.</li>
+    <li>Manual to push further safely.</li>
+    <li>Stop before you start losing units.</li>
+  </ul>
+</div>
 
-    <div class="callout">
-      <strong>Golden rule:</strong> If you’re unsure, ask before acting — we’d rather answer than undo a mistake.
-    </div>
-  </div>
+<div class="card" id="ge">
+  <h2>Guild Expedition (GE)</h2>
+  <ul>
+    <li>GE1–2: Casual / building up</li>
+    <li>GE3: Regular active</li>
+    <li>GE4: Strong fighters</li>
+  </ul>
+</div>
 
-  <!-- GBG -->
-  <div class="card" id="gbg">
-    <h2>GBG Playbook</h2>
-    <p>GBG is where we win as a team. The key is coordination: hit what’s called, don’t break locks, and don’t waste effort.</p>
+<div class="card" id="thread19">
+  <h2>1.9 Thread</h2>
+  <p>
+    <code>GB Name (lvl X → X+1)</code><br>
+    <code>P1 ___ | P2 ___ | P3 ___ | P4 ___ | P5 ___</code>
+  </p>
+</div>
 
-    <div class="grid">
-      <div class="col6">
-        <h3>Sector etiquette</h3>
-        <ul>
-          <li><strong>Hit called sectors only</strong> (avoid random hits).</li>
-          <li><strong>Respect locks</strong>: if a sector is locked, don’t touch it unless told.</li>
-          <li><strong>Build/keep sieges</strong> where leadership requests.</li>
-          <li>When in doubt: pause and ask.</li>
-        </ul>
-      </div>
-      <div class="col6">
-        <h3>Smart fighting</h3>
-        <ul>
-          <li>Auto-battle is fine at low/moderate attrition.</li>
-          <li>Switch to manual when losses rise or you hit your “safe limit”.</li>
-          <li>Stop before you start feeding units unnecessarily.</li>
-        </ul>
-      </div>
-    </div>
+<div class="card" id="qi">
+  <h2>Quantum Incursions</h2>
+  <p>Follow the chosen path and upgrades. Consistency over hero runs.</p>
+</div>
 
-    <div class="callout">
-      <span class="tag gbg">⚔️ GBG Contacts</span>
-      <strong>Long Shadow</strong> • <strong>KatsuChicken</strong>
-      <div class="small" style="margin-top:6px">
-        If you need direction (attrition, matchups, which sector), ask them first.
-      </div>
-    </div>
-  </div>
-
-  <!-- FIGHTING / TROOP COMBOS -->
-  <div class="card" id="fighting">
-    <h2>Fighting Guide (Troop Combos)</h2>
-    <p>
-      These are practical, easy-to-remember combos for most ages. Results depend on your boosts, age units, and enemy mix.
-      If a fight looks ugly, swap army before you commit.
-    </p>
-
-    <table>
-      <thead>
-        <tr><th>Situation</th><th>Recommended Army</th><th>Why it works</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>General purpose (auto)</td>
-          <td><strong>2× Fast + 6× Ranged</strong></td>
-          <td>Fast units tie up threats while ranged clears safely.</td>
-        </tr>
-        <tr>
-          <td>Harder fights / higher attrition</td>
-          <td><strong>1× Heavy + 7× Ranged</strong></td>
-          <td>Heavy absorbs hits while ranged deletes priority targets.</td>
-        </tr>
-        <tr>
-          <td>Enemy has lots of artillery</td>
-          <td><strong>6–8× Fast</strong></td>
-          <td>Fast units reach artillery quickly and stop the damage.</td>
-        </tr>
-        <tr>
-          <td>Enemy has lots of fast</td>
-          <td><strong>6–8× Heavy</strong></td>
-          <td>Heavy resists fast better; manual if you’re taking losses.</td>
-        </tr>
-        <tr>
-          <td>Awkward map / terrain / water</td>
-          <td><strong>Ranged + Artillery mix</strong></td>
-          <td>Positioning matters more — manual often safer here.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="grid">
-      <div class="col6">
-        <h3>Manual-fight tips (simple)</h3>
-        <ul>
-          <li>Focus-fire dangerous units first (enemy artillery/ranged).</li>
-          <li>Don’t sacrifice wounded units — keep them back.</li>
-          <li>Use cover/line-of-sight on tricky maps.</li>
-          <li>If your first two turns go bad, retreat and swap army.</li>
-        </ul>
-      </div>
-      <div class="col6">
-        <h3>Auto-battle safety tips</h3>
-        <ul>
-          <li>If you lose a unit twice in a row: consider stopping or going manual.</li>
-          <li>When your fights start “costing” units, you’re near your safe attrition.</li>
-          <li>Consistency beats hero runs.</li>
-        </ul>
-      </div>
-    </div>
-
-    <details>
-      <summary>Want this tailored to our most common fighting age?</summary>
-      <p class="small">
-        Tell me the main age your fighters are in (Space Hub / Titans / mixed) and whether you mostly auto or manual,
-        and I can rewrite this section with age-specific combos.
-      </p>
-    </details>
-  </div>
-
-  <!-- ATTRITION -->
-  <div class="card" id="attrition">
-    <h2>Attrition Guide (When to Stop)</h2>
-    <p>
-      Attrition is personal. The goal is to farm points without feeding units. Your “safe” attrition depends on boosts,
-      unit choice, and whether you manual-fight.
-    </p>
-
-    <div class="grid">
-      <div class="col6">
-        <h3>Easy rule of thumb</h3>
-        <div class="callout">
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <span class="tag good">✅ Keep going</span>
-            <span class="tag warn">⚠️ Slow down</span>
-            <span class="tag neutral">⛔ Stop</span>
-          </div>
-          <ul style="margin-top:8px">
-            <li><strong>✅ Keep going</strong>: you’re winning clean with minimal damage.</li>
-            <li><strong>⚠️ Slow down</strong>: units are taking heavy hits or you’re replacing losses.</li>
-            <li><strong>⛔ Stop</strong>: you start losing units regularly (especially same type).</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col6">
-        <h3>Auto vs Manual</h3>
-        <ul>
-          <li><strong>Auto</strong>: fast and consistent, but can throw units away at higher attrition.</li>
-          <li><strong>Manual</strong>: takes longer, but pushes your safe attrition higher.</li>
-          <li>Best method: auto until fights get rough, then manual key matchups.</li>
-        </ul>
-      </div>
-    </div>
-
-    <details>
-      <summary>Simple attrition reporting (optional)</summary>
-      <p class="small">
-        If leadership asks: post something like
-        <span class="inline code">“At 45 attrition, switching to manual. Stopping at 55.”</span>
-        so we know what support you can provide.
-      </p>
-    </details>
-  </div>
-
-  <!-- GE -->
-  <div class="card" id="ge">
-    <h2>Guild Expedition (GE)</h2>
-    <p>GE is our weekly baseline. The goal is reliable contribution — not stress.</p>
-
-    <div class="grid">
-      <div class="col6">
-        <h3>Targets</h3>
-        <table>
-          <thead><tr><th>Member type</th><th>Suggested weekly GE target</th></tr></thead>
-          <tbody>
-            <tr><td>Casual / building up</td><td>GE1–GE2 completion (or agreed points)</td></tr>
-            <tr><td>Regular active</td><td>GE3 completion</td></tr>
-            <tr><td>Strong fighters</td><td>GE4 completion</td></tr>
-          </tbody>
-        </table>
-        <p class="small">If leadership sets an exact target for the week, that overrides this table.</p>
-      </div>
-
-      <div class="col6">
-        <h3>Best practices</h3>
-        <ul>
-          <li>Use battles when efficient; negotiate when sensible.</li>
-          <li>Don’t burn your whole stockpile early — pace it.</li>
-          <li>If you’re stuck, ask for tips (buildings, boosts, unit choices).</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- 1.9 THREAD -->
-  <div class="card" id="thread19">
-    <h2>1.9 Thread (Rules + Templates)</h2>
-    <p>
-      The 1.9 thread is how we level Great Buildings efficiently. The key is consistency:
-      post correctly, take correctly, and communicate.
-    </p>
-
-    <div class="grid">
-      <div class="col6">
-        <h3>Rules (simple)</h3>
-        <ul>
-          <li>Only take spots you can fully cover at 1.9.</li>
-          <li>Don’t snipe guildmates’ posted buildings.</li>
-          <li>If you take a spot, take it promptly (don’t hold it).</li>
-          <li>If you make a mistake, say it immediately so we can fix it fast.</li>
-        </ul>
-      </div>
-
-      <div class="col6">
-        <h3>Posting template</h3>
-        <div class="callout">
-          <div class="small">Copy/paste example:</div>
-          <p style="margin:8px 0 0;color:#fff;line-height:1.45">
-            <span class="inline code">GB Name (Lvl X → X+1)</span><br>
-            <span class="inline code">P1: ___ FP • P2: ___ FP • P3: ___ FP • P4: ___ FP • P5: ___ FP</span><br>
-            <span class="inline code">Lock at: ___</span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <details>
-      <summary>Quick sanity check formula</summary>
-      <p class="small">
-        If you’re unsure: ask leadership or a strong donor before posting. Saves FP and prevents lock drama.
-      </p>
-    </details>
-  </div>
-
-  <!-- QI -->
-  <div class="card" id="qi">
-    <h2>Quantum Incursions (QI)</h2>
-    <p>QI rewards coordination. Follow the chosen path and upgrade plan so the guild progresses efficiently.</p>
-
-    <div class="grid">
-      <div class="col6">
-        <h3>Pathing</h3>
-        <ul>
-          <li>Follow the guild’s chosen path — avoid branching unless asked.</li>
-          <li>Clear what you can cleanly; don’t waste attempts on bad matchups.</li>
-          <li>Communicate blockers (hard node, lacking unit types, etc.).</li>
-        </ul>
-      </div>
-      <div class="col6">
-        <h3>Upgrade priorities (general)</h3>
-        <ul>
-          <li>Upgrades that increase consistency > risky “big swings”.</li>
-          <li>Prioritise upgrades that benefit the most members.</li>
-          <li>If leadership posts a priority list, follow it.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="callout">
-      <strong>QI mindset:</strong> Consistency over hero runs. A steady guild beats a few big pushes.
-    </div>
-  </div>
-
-  <!-- MEMBERS -->
-  <div class="card" id="members">
-    <h2>Members — Cirgard</h2>
-    <p>
-      <span class="tag found">👑 Founder</span>
-      <span class="tag lead">⭐ Leader</span>
-      <span class="tag gbg">⚔️ GBG Contact</span>
-    </p>
-
-    <table aria-label="Member list">
-      <thead>
-        <tr><th>Member</th><th>Role</th></tr>
-      </thead>
-      <tbody id="memberRows"></tbody>
-    </table>
-
-    <details>
-      <summary>How to update members</summary>
-      <p class="small">
-        Edit the <span class="inline code">members</span> list in the script at the bottom.
-        Change <span class="inline code">flag</span> emojis and roles like
-        <span class="inline code">founder</span>, <span class="inline code">leader</span>, <span class="inline code">gbg</span>.
-      </p>
-    </details>
-  </div>
+<div class="card" id="members">
+  <h2>Members — Cirgard</h2>
+  <p>
+    <span class="tag found">👑 Founder</span>
+    <span class="tag lead">⭐ Leader</span>
+    <span class="tag gbg">⚔️ GBG</span>
+  </p>
+  <table>
+    <thead><tr><th>Member</th><th>Role</th></tr></thead>
+    <tbody id="memberRows"></tbody>
+  </table>
+</div>
 
 </main>
 
@@ -548,8 +235,6 @@ footer{
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Members + flags (from your screenshot)
-// Note: England flags replaced with 🇬🇧 to avoid the "black flag" emoji rendering issue on Windows/Chrome.
 const members = [
   {name:"Lividboyo",flag:"🇬🇧",role:"founder"},
   {name:"The Foundation",flag:"🇬🇧",role:"founder"},
@@ -574,28 +259,24 @@ const members = [
   {name:"mightyMJK",flag:"🇫🇮",role:""},
 ];
 
-function badges(role){
-  const b=[];
-  if(role.includes("founder")) b.push('<span class="tag found">👑 Founder</span>');
-  if(role.includes("leader"))  b.push('<span class="tag lead">⭐ Leader</span>');
-  if(role.includes("gbg"))     b.push('<span class="tag gbg">⚔️ GBG Contact</span>');
+function badge(role){
+  let b=[];
+  if(role.includes("founder"))b.push("👑 Founder");
+  if(role.includes("leader"))b.push("⭐ Leader");
+  if(role.includes("gbg"))b.push("⚔️ GBG");
   return b.join(" ") || "—";
 }
 
-// Sort: founders first, then leaders, then gbg, then the rest A–Z
 members.sort((a,b)=>{
-  const w = r => r.includes("founder") ? 0 : r.includes("leader") ? 1 : r.includes("gbg") ? 2 : 3;
-  return w(a.role)-w(b.role) || a.name.localeCompare(b.name);
+  const w=r=>r.includes("founder")?0:r.includes("leader")?1:r.includes("gbg")?2:3;
+  return w(a.role)-w(b.role)||a.name.localeCompare(b.name);
 });
 
 document.getElementById("memberRows").innerHTML =
-  members.map(m => `
+  members.map(m=>`
     <tr>
-      <td style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:18px">${m.flag || "🌍"}</span>
-        <span>${m.name}</span>
-      </td>
-      <td>${badges(m.role)}</td>
+      <td>${m.flag} ${m.name}</td>
+      <td>${badge(m.role)}</td>
     </tr>
   `).join("");
 </script>
