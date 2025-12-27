@@ -1,512 +1,304 @@
-<section class="card">
-  <h2>⚔️ Fighting Guide (By Age)</h2>
-  <p class="muted">Expand your age to see recommended <strong>Attack</strong> and <strong>Defense</strong> combinations.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Limitless – Guild Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <div class="age-accordions">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- IRON AGE -->
-    <details class="accordion age" open>
-      <summary class="accordion__summary">
-        <span>Iron Age (IA)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>1 Horse + 7 Rogues</li>
-            <li>1 Legion + 7 Rogues</li>
-            <li>2–4 Artillery + 4–6 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Ballista</li>
-            <li>6–7 Ballista + 1–2 Drummers</li>
-            <li>8 Archers</li>
-            <li>5 Drummers + 3 Rogues</li>
-          </ul>
-        </div>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1, h2, h3, h4 {
+      color: #f8fafc;
+      margin-top: 0;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .muted {
+      color: #cbd5e1;
+      opacity: 0.9;
+    }
+
+    .code-block {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      margin: 10px 0;
+    }
+
+    details.accordion {
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .accordion__summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      font-weight: 700;
+    }
+
+    .accordion__summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion__chev {
+      transition: transform 200ms ease;
+    }
+
+    details[open] .accordion__chev {
+      transform: rotate(180deg);
+    }
+
+    .accordion__content {
+      padding: 14px 16px;
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .resource-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .resource-list li {
+      padding: 10px 12px;
+      background: rgba(2, 6, 23, 0.4);
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .resource-list a {
+      font-weight: 700;
+      color: #38bdf8;
+      text-decoration: none;
+      margin-right: 6px;
+    }
+
+    .resource-list a:hover {
+      text-decoration: underline;
+    }
+
+    .age-accordions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 860px) {
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .combo-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Welcome -->
+    <section class="card">
+      <h1>Welcome to Limitless</h1>
+      <p>
+        Limitless is an active, international guild focused on teamwork,
+        consistent contribution, and steady improvement.
+      </p>
+      <p>
+        Our main priorities are <strong>Guild Battlegrounds (GBG)</strong> and
+        <strong>Guild Expeditions (GE)</strong>. We encourage participation,
+        communication, and coordinated play.
+      </p>
+      <p class="muted">
+        Real life comes first — when you’re active, contribute where you can
+        and follow guild guidelines to keep things running smoothly.
+      </p>
+    </section>
+
+    <!-- 1.9 Guide -->
+    <section class="card">
+      <h2>🏛️ How to Use the 1.9 Thread</h2>
+
+      <p>
+        The 1.9 thread allows members to safely level Great Buildings by
+        reserving reward spots at 1.9 value. Please follow this format exactly.
+      </p>
+
+      <h3>Posting a Building</h3>
+      <ul>
+        <li>Post <strong>only available spots</strong>.</li>
+        <li>List spots from <strong>P5 at the top</strong> down to <strong>P1 at the bottom</strong>.</li>
+        <li>This order is intentional — <strong>P1 is taken first</strong>.</li>
+      </ul>
+
+      <h3>Why This Format Is Used</h3>
+      <p>
+        Because P1 is taken first, it is placed at the bottom. This allows you
+        to simply delete the last line each time a spot is taken, without
+        scrolling back into the message.
+      </p>
+
+      <h3>Example – Correct Format</h3>
+      <div class="code-block">
+Gus – Observatory
+P5 (19)
+P4 (95)
+P3 (371)
+P2 (1102)
+P1 (2204)
       </div>
-    </details>
 
-    <!-- EMA -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Early Middle Ages (EMA)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>1 Horse + 7 Rogues</li>
-            <li>2 Horse + 6 Rogues</li>
-            <li>1 Heavy + 7 Rogues</li>
-            <li>2–4 Artillery + 4–6 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Catapults</li>
-            <li>8 Mounted Archers</li>
-            <li>Drummers mixed with Rogues or Catapults (situational)</li>
-          </ul>
-        </div>
+      <h3>As Spots Are Taken</h3>
+      <div class="code-block">
+Gus – Observatory
+P5 (19)
+P4 (95)
+P3 (371)
+P2 (1102)
       </div>
-    </details>
 
-    <!-- HMA -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>High Middle Ages (HMA)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <p class="muted">Arrowheads notes HMA attack is “same as EMA/IRON”.</p>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Trebuchets</li>
-            <li>6 Trebuchets + 2 Crossbows</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      <h3>When Finished</h3>
+      <ul>
+        <li>When all spots are taken, write <strong>Clear</strong> or <strong>X</strong>.</li>
+      </ul>
+    </section>
 
-    <!-- LMA -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Late Middle Ages (LMA)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <p class="muted">Arrowheads notes LMA attack is “same as EMA/IRON”.</p>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Cannons</li>
-            <li>8 Longbow Archers</li>
-            <li>Siege idea: 1 Cannon + 7 Rogues (can be surprisingly tough)</li>
+    <!-- Tools -->
+    <section class="card">
+      <details class="accordion">
+        <summary class="accordion__summary">
+          <span>🔗 Helpful FOE Tools & Resources</span>
+          <span class="accordion__chev">▾</span>
+        </summary>
+        <div class="accordion__content">
+          <ul class="resource-list">
+            <li><a href="https://foe.tools/" target="_blank">FOE Tools</a> GB cost calculators and reward values.</li>
+            <li><a href="https://foe-helper.com/" target="_blank">FOE Helper</a> Browser extension with 1.9 assistance.</li>
+            <li><a href="https://foe.city/" target="_blank">FOE City Planner</a> City layout planning tool.</li>
+            <li><a href="https://forgeofempires.fandom.com/" target="_blank">FOE Wiki</a> General reference and mechanics.</li>
           </ul>
         </div>
-      </div>
-    </details>
+      </details>
+    </section>
 
-    <!-- COLONIAL -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Colonial Age (CA)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <p class="muted">Arrowheads notes CA attack is “same as EMA/IRON” (with Rangers hiding in trees).</p>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Field Guns</li>
-            <li>1–2 Rangers + Rogues</li>
-            <li>8 Muskets</li>
-            <li>3 Heavy + 5 Rogues (and variations like 1 Heavy + 2 Rangers + 5 Rogues)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    <!-- Fighting Guide -->
+    <section class="card">
+      <h2>⚔️ Fighting Guide (By Age)</h2>
+      <p class="muted">Expand your age group to view recommended attack and defence combinations.</p>
 
-    <!-- INDUSTRIAL -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Industrial Age (Indy)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <p class="muted">Arrowheads notes Indy attack is similar to EMA/IRON, with extra emphasis on Howitzers/Artillery.</p>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>1–2 Jaegers + Rogues</li>
-            <li>1 Jaeger + 1 Rifle + 6 Rogues</li>
-            <li>8 Breech Loaders</li>
-            <li>8 Rifles (best when mixed with other DAs)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+      <div class="age-accordions">
 
-    <!-- PROGRESSIVE -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Progressive Era (PE)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>4 Artillery + 4 Rogues</li>
-            <li>2 Conscript + 6 Rogues</li>
-            <li>1 Tank + 1 Conscript + 6 Rogues</li>
-            <li>1 Sniper + 7 Rogues (situational)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Artillery</li>
-            <li>4 Conscript + 4 Sniper</li>
-            <li>4 Artillery + 4 Sniper</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+        <details class="accordion">
+          <summary class="accordion__summary">
+            <span>Iron Age → Industrial Age</span>
+            <span class="accordion__chev">▾</span>
+          </summary>
+          <div class="accordion__content two-col">
+            <div>
+              <h4>Attack</h4>
+              <ul class="combo-list">
+                <li>1 Horse / Heavy + 7 Rogues</li>
+                <li>2–4 Artillery + Rogues</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Defence</h4>
+              <ul class="combo-list">
+                <li>8 Artillery</li>
+                <li>Mixed Artillery + Rogues</li>
+              </ul>
+            </div>
+          </div>
+        </details>
 
-    <!-- MODERN -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Modern Era (ME)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2–4 Artillery + 4–6 Rogues</li>
-            <li>1 Heavy + 7 Rogues</li>
-            <li>1 Fast + 7 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Artillery</li>
-            <li>8 Bazooka</li>
-            <li>8 Paratrooper</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+        <details class="accordion">
+          <summary class="accordion__summary">
+            <span>Progressive → Contemporary Era</span>
+            <span class="accordion__chev">▾</span>
+          </summary>
+          <div class="accordion__content two-col">
+            <div>
+              <h4>Attack</h4>
+              <ul class="combo-list">
+                <li>4 Artillery + 4 Rogues</li>
+                <li>1–2 Tanks / Champs + Rogues</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Defence</h4>
+              <ul class="combo-list">
+                <li>8 Artillery</li>
+                <li>8 Heavy Units</li>
+              </ul>
+            </div>
+          </div>
+        </details>
 
-    <!-- POSTMODERN -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Postmodern Era (PME)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>1–2 MG Team + Rogues</li>
-            <li>2–3 Artillery + 5–6 Rogues</li>
-            <li>1 Champs + 7 Rogues</li>
-            <li>1 Fast + 7 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Artillery</li>
-            <li>8 Commandos (especially paired with 8 Artillery in other slots)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+        <details class="accordion">
+          <summary class="accordion__summary">
+            <span>Future → Space Ages</span>
+            <span class="accordion__chev">▾</span>
+          </summary>
+          <div class="accordion__content two-col">
+            <div>
+              <h4>Attack</h4>
+              <ul class="combo-list">
+                <li>2 Fast / Hover + Rogues</li>
+                <li>Artillery + Rogues (no flyers)</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Defence</h4>
+              <ul class="combo-list">
+                <li>8 Fast Units</li>
+                <li>8 Artillery</li>
+              </ul>
+            </div>
+          </div>
+        </details>
 
-    <!-- CONTEMPORARY -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Contemporary Era (CE)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>1 Anti-Air + 7 Rogues (first move manual)</li>
-            <li>2 Anti-Air + 6 Rogues</li>
-            <li>2 Champs + 6 Rogues</li>
-            <li>8 Helicopters</li>
-            <li>1 Tank + 7 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Assault Tanks</li>
-            <li>7 Assault Tanks + 1 Missile</li>
-            <li>8 Missiles (only when mixed with other DAs)</li>
-          </ul>
-        </div>
       </div>
-    </details>
-
-    <!-- TOMORROW -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Tomorrow Era (TE)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>1–2 Champ + 6–7 Rogues</li>
-            <li>1 Stealth Tank + 7 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Stealth Tanks</li>
-            <li>1–2 Stealth Tanks mixed with Rogues (annoying defense option)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- FUTURE -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Future Era (FE)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2 Hover Tanks + 6 Rogues</li>
-            <li>1 Rail Gun + 1 Hover Tank + 6 Rogues</li>
-            <li>2 Rail Guns + 6 Rogues</li>
-            <li>1 Hover Tank + 7 Rogues</li>
-            <li>1 Satellite Spotter + 7 Rogues (situational)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Hover Tanks</li>
-            <li>3 Rail Guns + 5 Hover Tanks</li>
-            <li>8 Drone Swarm (good to mix in a sector)</li>
-            <li>8 Exoskeleton (best when not alone)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- ARCTIC -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Arctic Future (AF)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <p class="muted">(Not explicitly listed as combos on the Arrowheads attack page in the captured section.)</p>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>Include 1 flying unit (e.g., Dragon Drone) so artillery can’t hit everything</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- OCEANIC -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Oceanic Future (OF)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2 Subcruisers + 6 Rogues</li>
-            <li>1 Subcruiser + 7 Rogues</li>
-            <li>2 Turtles + 2 Subcruisers + 4 Rogues (vs mixed turtles)</li>
-            <li>8 Turtles (no flying units present)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>Include 1 flying unit (e.g., Glider) so artillery can’t hit everything</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- VIRTUAL -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Virtual Future (VF)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>1 Ronin + 7 Rogues</li>
-            <li>2 Ronin + 6 Rogues</li>
-            <li>2 Rockets + 2 Ronin + 4 Rogues (vs mixed rockets)</li>
-            <li>8 VF Rockets (no flying units present)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>Ninjas can be annoying when mixed (not as a single/only defense)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- MARS -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Space Age Mars (SAM)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2 Wardens + 6 Rogues</li>
-            <li>1 Sentinel + 1 Warden + 6 Rogues</li>
-            <li>1–2 Sentinels + 6–7 Rogues</li>
-            <li>4 Sentinels + 4 Rogues</li>
-            <li>8 Sentinels (situational)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>7–8 Nail Guns (tough option mentioned for later ages; see SAAB note)</li>
-            <li>7 Wardens + 1 Sentinel (noted as toughest city defense idea)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- SAAB -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Space Age Asteroid Belt (SAAB)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2 Nail Guns + Rogues</li>
-            <li>4 Artillery + 4 Rogues (no fast/flying in enemy)</li>
-            <li>8 Artillery (no flying in enemy)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>7–8 Nail Guns (toughest to kill)</li>
-            <li>Include 1 flying fast unit (to block rocket-style attacks)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- SAV -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Space Age Venus (SAV)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2–3 Power Dragons + Rogues</li>
-            <li>2–4 Fast + Rogues (or 8 Fast)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Energy Cannons (fast) is noted as toughest defense</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- SAJM -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Space Age Jupiter Moon (SAJM)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2 Harpoon Grenadiers + Rogues</li>
-            <li>2–4 Fast + Rogues (or 8 Fast)</li>
-            <li>8 Cavitation Tanks (no flying units present)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Abyssal Gliders (fast)</li>
-            <li>8 Harpoon Grenadiers (ranged, Contact skill)</li>
-            <li>Include 1 champ or flying fast unit (synergy note)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- TITAN -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Space Age Titan (SAT)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2–4 Fast + Rogues (or 8 Fast)</li>
-            <li>2 Artillery + 2 Light + 4 Rogues (vs mixed artillery enemies)</li>
-            <li>8 Artillery (no flying units present)</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Fast units (toughest defense)</li>
-          </ul>
-        </div>
-      </div>
-    </details>
-
-    <!-- SPACE HUB -->
-    <details class="accordion age">
-      <summary class="accordion__summary">
-        <span>Space Age Space Hub (SASH)</span><span class="accordion__chev" aria-hidden="true">▾</span>
-      </summary>
-      <div class="accordion__content two-col">
-        <div class="col">
-          <h4>Attack combos</h4>
-          <ul class="combo-list">
-            <li>2 Ranged + Rogues (Contact skill strategy)</li>
-            <li>2–4 Fast + Rogues (or 8 Fast)</li>
-            <li>2–3 Artillery + Rogues</li>
-            <li>Special: vs 4 Fast + 4 Ranged enemy → 2 Ranged + 1 Heavy + 5 Rogues</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h4>Defense combos</h4>
-          <ul class="combo-list">
-            <li>8 Ranged units (Contact skill) – tough defense</li>
-            <li>8 Fast units</li>
-            <li>8 Artillery</li>
-          </ul>
-        </div>
-      </div>
-    </details>
+    </section>
 
   </div>
-</section>
+</body>
+</html>
