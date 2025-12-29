@@ -5,47 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Limitless — Cirgard Guild Hub</title>
 
+  <!--
+    VISUALS SETUP (GitHub Pages)
+    1) Create a folder in your repo: /assets/
+    2) Upload:
+        - /assets/hero.jpg  (your chosen hero/banner image)
+        - /assets/icon.svg  (optional favicon)
+    3) Update the --hero-image URL below if you use a different filename.
+  -->
+
   <style>
     :root{
       --bg:#050712;
-      --panel:rgba(255,255,255,.04);
+      --panel:rgba(255,255,255,.045);
       --panel2:rgba(255,255,255,.03);
       --text:#eaf0ff;
       --muted:rgba(234,240,255,.72);
       --border:rgba(255,255,255,.10);
       --border2:rgba(255,255,255,.08);
-      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --shadow:0 12px 34px rgba(0,0,0,.42);
       --radius:18px;
+
+      /* accent system */
+      --a1: rgba(124,58,237,.55);  /* purple */
+      --a2: rgba(34,211,238,.45);  /* cyan */
+      --glow: 0 0 0 1px rgba(255,255,255,.06), 0 14px 50px rgba(0,0,0,.35);
+
+      /* hero image */
+      --hero-image: url("assets/hero.jpg");
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(900px 520px at 20% 0%, rgba(124,58,237,.22), transparent 65%),
-                  radial-gradient(900px 520px at 80% 0%, rgba(34,211,238,.16), transparent 65%),
-                  var(--bg);
+      background:
+        radial-gradient(900px 520px at 20% 0%, rgba(124,58,237,.22), transparent 65%),
+        radial-gradient(900px 520px at 80% 0%, rgba(34,211,238,.16), transparent 65%),
+        var(--bg);
       color:var(--text);
     }
     a{color:inherit}
     .wrap{max-width:1150px;margin:auto;padding:16px}
 
-    header{padding:26px 0 14px}
-    h1{margin:0;font-size:30px;letter-spacing:.2px}
-    .subtitle{margin-top:6px;color:var(--muted)}
-    hr.sep{border:0;border-top:1px solid var(--border2);margin:18px 0}
+    /* HERO */
+    header.hero{
+      padding:18px 0 10px;
+    }
+    .heroCard{
+      position:relative;
+      border-radius:calc(var(--radius) + 6px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        radial-gradient(900px 420px at 10% 0%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 420px at 90% 0%, rgba(34,211,238,.14), transparent 60%),
+        rgba(0,0,0,.18);
+      box-shadow: var(--shadow);
+    }
+    .heroMedia{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(90deg, rgba(5,7,18,.85) 0%, rgba(5,7,18,.55) 48%, rgba(5,7,18,.88) 100%),
+        var(--hero-image);
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.03);
+    }
+    .heroInner{
+      position:relative;
+      display:flex;
+      gap:16px;
+      align-items:flex-end;
+      justify-content:space-between;
+      padding:22px 22px 18px;
+      min-height: 170px;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:.2px;
+      line-height:1.1;
+      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
+    .subtitle{
+      margin:0;
+      color:rgba(234,240,255,.85);
+      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
+    .heroBadges{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+      max-width: 520px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--glow);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .badge svg{opacity:.95}
 
+    /* NAV */
+    hr.sep{border:0;border-top:1px solid var(--border2);margin:14px 0 0}
     nav{
       position:sticky;top:0;z-index:50;
       backdrop-filter: blur(12px);
-      background: rgba(5,7,18,.65);
+      background: rgba(5,7,18,.70);
       border-bottom:1px solid var(--border);
     }
     nav .wrap{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
       padding:10px 16px;
     }
     nav a{
@@ -71,6 +151,7 @@
       white-space:nowrap;
     }
 
+    /* CARDS + LAYOUT */
     .card{
       background:var(--panel);
       border:1px solid var(--border);
@@ -79,17 +160,36 @@
       margin-top:16px;
       box-shadow:var(--shadow);
     }
-    .card h2{margin:0 0 8px;font-size:22px}
+    .card h2{
+      margin:0 0 8px;
+      font-size:22px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .card h2 .icon{
+      width:22px;height:22px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      border-radius:10px;
+      background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(34,211,238,.14));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--glow);
+    }
     .card h3{margin:14px 0 8px;font-size:16px;color:#fff}
     .card p{margin:8px 0;color:var(--muted);line-height:1.45}
     .card ul{margin:8px 0 0 20px;color:var(--muted);line-height:1.55}
     .small{font-size:13px;color:var(--muted)}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12, 1fr);
-      gap:14px;
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin:12px 0 0;
     }
+
+    .grid{display:grid;grid-template-columns:repeat(12, 1fr);gap:14px}
     .col6{grid-column:span 6}
     .col4{grid-column:span 4}
     .col8{grid-column:span 8}
@@ -97,8 +197,11 @@
     @media (max-width:900px){
       .col6,.col4,.col8{grid-column:span 12}
       nav .pill{margin-left:0;width:100%;text-align:center;justify-content:center}
+      .heroInner{flex-direction:column; align-items:flex-start}
+      .heroBadges{justify-content:flex-start}
     }
 
+    /* TAGS */
     .tag{
       display:inline-block;
       padding:4px 10px;
@@ -115,6 +218,7 @@
     .warn{border-color:rgba(251,191,36,.55)}
     .neutral{border-color:rgba(255,255,255,.18)}
 
+    /* CALLOUT */
     .callout{
       background:rgba(255,255,255,.04);
       border:1px solid var(--border2);
@@ -123,6 +227,7 @@
     }
     .callout strong{color:#fff}
 
+    /* TABLES */
     table{
       width:100%;
       border-collapse:collapse;
@@ -144,6 +249,7 @@
     }
     tbody tr:hover{background:rgba(255,255,255,.03)}
 
+    /* DETAILS */
     details{
       margin-top:10px;
       border:1px solid var(--border2);
@@ -152,7 +258,9 @@
       background:rgba(255,255,255,.03);
     }
     summary{cursor:pointer;color:#fff}
+    details[open]{box-shadow: inset 0 0 0 1px rgba(255,255,255,.04)}
 
+    /* CODE BLOCKS */
     code.inline{
       background:rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.14);
@@ -163,7 +271,6 @@
       text-align:left;
       display:inline-block;
     }
-
     pre.code-block{
       background:rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.12);
@@ -177,6 +284,7 @@
       white-space:pre-wrap;
     }
 
+    /* FOOTER */
     footer{
       margin-top:40px;
       padding:20px 0;
@@ -184,15 +292,36 @@
       font-size:13px;
       text-align:center;
     }
+
+    /* icon strokes */
+    .i{width:16px;height:16px}
+    .stroke{
+      fill:none;
+      stroke: url(#g);
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .stroke2{
+      fill:none;
+      stroke: rgba(234,240,255,.78);
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
   </style>
 </head>
 
 <body>
-  <header class="wrap">
-    <h1>Limitless</h1>
-    <div class="subtitle">Forge of Empires Guild Hub — <strong>Cirgard</strong></div>
-    <hr class="sep">
-  </header>
+  <!-- defs for gradient strokes (shared by all inline icons) -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="rgb(124,58,237)"/>
+        <stop offset="1" stop-color="rgb(34,211,238)"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
   <nav>
     <div class="wrap">
@@ -205,17 +334,50 @@
       <a href="#links">Links</a>
       <a href="#thread19">1.9 Thread</a>
       <a href="#members">Members</a>
-
-      <!-- Keep ONLY the modern pill you wanted -->
       <span class="pill">🏆 Competitive · 🤝 Team-Focused · 🌍 International</span>
     </div>
   </nav>
+
+  <!-- HERO -->
+  <header class="wrap hero">
+    <div class="heroCard">
+      <div class="heroMedia" aria-hidden="true"></div>
+
+      <div class="heroInner">
+        <div class="brand">
+          <h1>Limitless</h1>
+          <p class="subtitle">Forge of Empires Guild Hub — <strong>Cirgard</strong></p>
+        </div>
+
+        <div class="heroBadges" aria-label="Guild badges">
+          <span class="badge">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M12 3l2.5 5 5.5.8-4 3.9.9 5.6-4.9-2.6-4.9 2.6.9-5.6-4-3.9 5.5-.8L12 3z"/></svg>
+            Competitive
+          </span>
+          <span class="badge">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M7 12l3 3 7-7"/><path class="stroke2" d="M4 7h4M4 17h4"/></svg>
+            Team-Focused
+          </span>
+          <span class="badge">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9z"/><path class="stroke2" d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/></svg>
+            International
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr class="sep">
+  </header>
 
   <main class="wrap" id="home">
 
     <!-- WELCOME (QI removed) -->
     <div class="card">
-      <h2>Welcome</h2>
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 3l8 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9l8-6z"/><path class="stroke2" d="M9.5 21V12h5v9"/></svg>
+        </span>
+        Welcome
+      </h2>
       <p>
         <strong>Limitless</strong> is an international, competitive, drama-free guild focused on
         <strong>GBG</strong> and <strong>GE</strong>.
@@ -263,7 +425,13 @@
 
     <!-- RULES -->
     <div class="card" id="rules">
-      <h2>Guild Rules (Simple)</h2>
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M7 4h10a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V6a2 2 0 0 1 2-2z"/><path class="stroke2" d="M8 8h8M8 12h8"/></svg>
+        </span>
+        Guild Rules (Simple)
+      </h2>
+
       <div class="grid">
         <div class="col6">
           <h3>Culture</h3>
@@ -282,6 +450,7 @@
           </ul>
         </div>
       </div>
+
       <div class="callout">
         <strong>Golden rule:</strong> If you’re unsure, ask a leader before acting — we’d rather answer than undo a mistake.
       </div>
@@ -289,7 +458,13 @@
 
     <!-- GBG -->
     <div class="card" id="gbg">
-      <h2>GBG Playbook</h2>
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/><path class="stroke2" d="M9 12l2 2 4-5"/></svg>
+        </span>
+        GBG Playbook
+      </h2>
+
       <p>GBG is where we win as a team. The key is coordination: hit what’s called, don’t break locks, and don’t waste effort.</p>
 
       <div class="grid">
@@ -298,7 +473,7 @@
           <ul>
             <li><strong>Hit called sectors</strong> (avoid random hits).</li>
             <li><strong>Respect locks</strong>: if a sector is locked, don’t touch it unless told.</li>
-            <li><strong>Build for max support</strong>while maintaing the treasury.</li>
+            <li><strong>Build for max support</strong> while maintaing the treasury.</li>
             <li>Do not delete buildings even if the sector is being taken.</li>
             <li>When in doubt: pause and ask.</li>
           </ul>
@@ -309,408 +484,426 @@
             <li>Auto-battle is fine at low/moderate attrition.</li>
             <li>Switch to manual when losses rise or you hit your “safe limit”.</li>
             <li>Stop before you start feeding units unnecessarily.</li>
-         </ul>
-    </div>
-  </div>
-
-</div>
-    
-   <div class="card" id="fighting">
-  <h2>⚔️ Fighting Guide (By Age)</h2>
-  <p class="small">Expand your age to see recommended <strong>Attack</strong> and <strong>Defence</strong> combinations. Results depend on boosts and attrition.</p>
-
-  <!-- Iron Age -->
-  <details>
-    <summary><strong>Iron Age (IA)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>8× Ballista</li>
-      <li>4× Ballista + 4× Rogues</li>
-      <li>2× Ballista + 6× Rogues (safer)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Ballista</li>
-      <li>6× Ballista + 2× Heavy Infantry</li>
-    </ul>
-  </details>
-
-  <!-- Early Middle Ages -->
-  <details>
-    <summary><strong>Early Middle Ages (EMA)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Armored Infantry + 6× Rogues</li>
-      <li>1× Armored Infantry + 7× Rogues (higher attrition)</li>
-      <li>2× Catapult + 6× Rogues (map dependent)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Catapult</li>
-      <li>6× Catapult + 2× Armored Infantry</li>
-    </ul>
-  </details>
-
-  <!-- High Middle Ages -->
-  <details>
-    <summary><strong>High Middle Ages (HMA)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Champion + 6× Rogues</li>
-      <li>1× Champion + 7× Rogues (safer)</li>
-      <li>2× Trebuchet + 6× Rogues (vs heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Trebuchet</li>
-      <li>6× Trebuchet + 2× Heavy Infantry</li>
-    </ul>
-  </details>
-
-  <!-- Late Middle Ages -->
-  <details>
-    <summary><strong>Late Middle Ages (LMA)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Imperial Guard + 6× Rogues</li>
-      <li>1× Imperial Guard + 7× Rogues (safer)</li>
-      <li>2× Heavy Knight + 6× Rogues (vs artillery-heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Cannon</li>
-      <li>6× Cannon + 2× Imperial Guard</li>
-    </ul>
-  </details>
-
-  <!-- Colonial Age -->
-  <details>
-    <summary><strong>Colonial Age (CA)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Grenadier + 6× Rogues</li>
-      <li>1× Grenadier + 7× Rogues (safer)</li>
-      <li>2× Dragoon + 6× Rogues (vs artillery-heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Field Gun</li>
-      <li>6× Field Gun + 2× Grenadier</li>
-    </ul>
-  </details>
-
-  <!-- Industrial Age -->
-  <details>
-    <summary><strong>Industrial Age (Indy)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Howitzer + 6× Rogues</li>
-      <li>1× Howitzer + 7× Rogues (safer)</li>
-      <li>2× Tank + 6× Rogues (harder fights)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Howitzer</li>
-      <li>6× Howitzer + 2× Tank</li>
-    </ul>
-  </details>
-
-  <!-- Progressive Era -->
-  <details>
-    <summary><strong>Progressive Era (PE)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>8× Rapid Fire Cannon (easy auto)</li>
-      <li>2× Tank + 6× Rogues (higher attrition)</li>
-      <li>2× Rapid Fire Cannon + 6× Rogues (terrain dependent)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Rapid Fire Cannon</li>
-      <li>6× Rapid Fire Cannon + 2× Tank</li>
-    </ul>
-  </details>
-
-  <!-- Modern Era -->
-  <details>
-    <summary><strong>Modern Era (ME)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Battle Tank + 6× Rogues</li>
-      <li>1× Battle Tank + 7× Rogues (safer)</li>
-      <li>2× Mechanized Artillery + 6× Rogues (vs heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Mechanized Artillery</li>
-      <li>6× Mechanized Artillery + 2× Battle Tank</li>
-    </ul>
-  </details>
-
-  <!-- Postmodern Era -->
-  <details>
-    <summary><strong>Postmodern Era (PME)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× MG Team + 6× Rogues</li>
-      <li>1× MG Team + 7× Rogues (safer)</li>
-      <li>2× Assault Tank + 6× Rogues (harder fights)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× MG Team</li>
-      <li>6× MG Team + 2× Assault Tank</li>
-    </ul>
-  </details>
-
-  <!-- Contemporary Era -->
-  <details>
-    <summary><strong>Contemporary Era (CE)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Anti-Aircraft Vehicle + 6× Rogues</li>
-      <li>1× Anti-Aircraft Vehicle + 7× Rogues (safer)</li>
-      <li>2× Main Battle Tank + 6× Rogues (vs fast-heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Anti-Aircraft Vehicle</li>
-      <li>6× Anti-Aircraft Vehicle + 2× Main Battle Tank</li>
-    </ul>
-  </details>
-
-  <!-- Tomorrow Era -->
-  <details>
-    <summary><strong>Tomorrow Era (TE)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Stealth Tank + 6× Rogues</li>
-      <li>1× Stealth Tank + 7× Rogues (safer)</li>
-      <li>2× Combat Drone + 6× Rogues (map dependent)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Stealth Tank</li>
-      <li>6× Stealth Tank + 2× Combat Drone</li>
-    </ul>
-  </details>
-
-  <!-- Future Era -->
-  <details>
-    <summary><strong>Future Era (FE)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Hover Tank + 6× Rogues</li>
-      <li>1× Hover Tank + 7× Rogues (higher attrition)</li>
-      <li>2× Drone Swarm + 6× Rogues (vs artillery-heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Hover Tank</li>
-      <li>6× Hover Tank + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Arctic Future -->
-  <details>
-    <summary><strong>Arctic Future (AF)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Battle Fortress + 6× Rogues</li>
-      <li>1× Battle Fortress + 7× Rogues (safer)</li>
-      <li>2× Battle Fortress + 6× Rogues (manual often better)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Battle Fortress</li>
-      <li>6× Battle Fortress + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Oceanic Future -->
-  <details>
-    <summary><strong>Oceanic Future (OF)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Sub Cruiser + 6× Rogues</li>
-      <li>1× Sub Cruiser + 1× Turturret + 6× Rogues</li>
-      <li>8× Hydroelectric Eel (only if matchup favours it)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Sub Cruiser</li>
-      <li>6× Sub Cruiser + 2× Turturret</li>
-    </ul>
-  </details>
-
-  <!-- Virtual Future -->
-  <details>
-    <summary><strong>Virtual Future (VF)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Rocket Troop + 6× Rogues (safe auto)</li>
-      <li>1× Rocket Troop + 7× Rogues (safer)</li>
-      <li>2× Ronin Bot + 6× Rogues (harder fights)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Rocket Troop</li>
-      <li>6× Rocket Troop + 2× Ronin Bot</li>
-    </ul>
-  </details>
-
-  <!-- Space Age Mars -->
-  <details>
-    <summary><strong>Space Age Mars (SAM)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Sentinel + 6× Rogues</li>
-      <li>1× Sentinel + 7× Rogues (safer)</li>
-      <li>2× Sentinel + 6× Rogues (vs fast-heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Sentinel</li>
-      <li>6× Sentinel + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Space Age Asteroid Belt -->
-  <details>
-    <summary><strong>Space Age Asteroid Belt (SAAB)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Nail Storm + 6× Rogues</li>
-      <li>1× Nail Storm + 7× Rogues (safer)</li>
-      <li>2× Nail Storm + 6× Rogues (harder fights)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Nail Storm</li>
-      <li>6× Nail Storm + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Space Age Venus -->
-  <details>
-    <summary><strong>Space Age Venus (SAV)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Energy Cannon + 6× Rogues</li>
-      <li>1× Energy Cannon + 7× Rogues (safer)</li>
-      <li>2× Energy Cannon + 6× Rogues (matchup dependent)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Energy Cannon</li>
-      <li>6× Energy Cannon + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Space Age Jupiter Moon -->
-  <details>
-    <summary><strong>Space Age Jupiter Moon (SAJM)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Harpoon Grenadier + 6× Rogues</li>
-      <li>1× Harpoon Grenadier + 7× Rogues (safer)</li>
-      <li>2× Harpoon Grenadier + 6× Rogues (harder fights)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Harpoon Grenadier</li>
-      <li>6× Harpoon Grenadier + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Space Age Titan -->
-  <details>
-    <summary><strong>Space Age Titan (SAT)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Steel Warden + 6× Rogues (safe auto)</li>
-      <li>1× Steel Warden + 7× Rogues (higher attrition)</li>
-      <li>6–8× Steel Warden (vs fast-heavy)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Steel Warden</li>
-      <li>6× Steel Warden + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Space Age Space Hub -->
-  <details>
-    <summary><strong>Space Age Space Hub (SASH)</strong></summary>
-    <h3>Attack</h3>
-    <ul>
-      <li>2× Space Marine + 6× Rogues (safe auto)</li>
-      <li>1× Space Marine + 7× Rogues (higher attrition)</li>
-      <li>2× Space Marine + 4–6× Rogues (awkward maps)</li>
-    </ul>
-    <h3>Defence</h3>
-    <ul>
-      <li>8× Space Marine</li>
-      <li>6× Space Marine + 2× Rogues</li>
-    </ul>
-  </details>
-
-  <!-- Tips moved INSIDE same wrap/category -->
-  <div class="grid" style="margin-top:14px">
-    <div class="col6">
-      <h3>Manual-fight tips (simple)</h3>
-      <ul>
-        <li>Focus-fire dangerous units first (enemy artillery/ranged).</li>
-        <li>Don’t sacrifice wounded units — keep them back.</li>
-        <li>Use cover/line-of-sight on tricky maps.</li>
-        <li>If your first two turns go bad, retreat and swap army.</li>
-      </ul>
-    </div>
-    <div class="col6">
-      <h3>Auto-battle safety tips</h3>
-      <ul>
-        <li>If you lose a unit twice in a row: consider stopping or going manual.</li>
-        <li>When fights start “costing” units, you’re near your safe attrition.</li>
-        <li>Once you are losing more than four units consistently, think about stopping.</li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-
-   <div class="card" id="attrition">
-  <h2>Attrition Guide (When to Stop)</h2>
-  <p>
-    Attrition is personal. The goal is to farm points without feeding units.
-    Your “safe” attrition depends on boosts, unit choice, and whether you manual-fight.
-  </p>
-
-  <div class="grid">
-    <div class="col6">
-      <h3>Easy rule of thumb</h3>
-      <div class="callout">
-        <ul style="margin:0 0 0 20px">
-          <li><strong>Keep going:</strong> you’re winning clean with minimal damage.</li>
-          <li><strong>Slow down:</strong> units are taking heavy hits or you’re replacing losses.</li>
-          <li><strong>Stop:</strong> stop before you start taking heavy losses.</li>
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="col6">
-      <h3>Auto vs Manual</h3>
-      <ul>
-        <li><strong>Auto:</strong> fast and consistent, but can throw units away at higher attrition.</li>
-        <li><strong>Manual:</strong> takes longer, but pushes your safe attrition higher.</li>
-        <li><strong>Best method:</strong> auto until fights get rough, then manual key matchups.</li>
-      </ul>
+    <!-- FIGHTING -->
+    <div class="card" id="fighting">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M14 3l7 7-3 3-7-7 3-3z"/><path class="stroke2" d="M2 22l6-2 3-3-4-4-3 3-2 6z"/></svg>
+        </span>
+        Fighting Guide (By Age)
+      </h2>
+
+      <p class="small">Expand your age to see recommended <strong>Attack</strong> and <strong>Defence</strong> combinations. Results depend on boosts and attrition.</p>
+
+      <!-- Iron Age -->
+      <details>
+        <summary><strong>Iron Age (IA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>8× Ballista</li>
+          <li>4× Ballista + 4× Rogues</li>
+          <li>2× Ballista + 6× Rogues (safer)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Ballista</li>
+          <li>6× Ballista + 2× Heavy Infantry</li>
+        </ul>
+      </details>
+
+      <!-- Early Middle Ages -->
+      <details>
+        <summary><strong>Early Middle Ages (EMA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Armored Infantry + 6× Rogues</li>
+          <li>1× Armored Infantry + 7× Rogues (higher attrition)</li>
+          <li>2× Catapult + 6× Rogues (map dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Catapult</li>
+          <li>6× Catapult + 2× Armored Infantry</li>
+        </ul>
+      </details>
+
+      <!-- High Middle Ages -->
+      <details>
+        <summary><strong>High Middle Ages (HMA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Champion + 6× Rogues</li>
+          <li>1× Champion + 7× Rogues (safer)</li>
+          <li>2× Trebuchet + 6× Rogues (vs heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Trebuchet</li>
+          <li>6× Trebuchet + 2× Heavy Infantry</li>
+        </ul>
+      </details>
+
+      <!-- Late Middle Ages -->
+      <details>
+        <summary><strong>Late Middle Ages (LMA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Imperial Guard + 6× Rogues</li>
+          <li>1× Imperial Guard + 7× Rogues (safer)</li>
+          <li>2× Heavy Knight + 6× Rogues (vs artillery-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Cannon</li>
+          <li>6× Cannon + 2× Imperial Guard</li>
+        </ul>
+      </details>
+
+      <!-- Colonial Age -->
+      <details>
+        <summary><strong>Colonial Age (CA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Grenadier + 6× Rogues</li>
+          <li>1× Grenadier + 7× Rogues (safer)</li>
+          <li>2× Dragoon + 6× Rogues (vs artillery-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Field Gun</li>
+          <li>6× Field Gun + 2× Grenadier</li>
+        </ul>
+      </details>
+
+      <!-- Industrial Age -->
+      <details>
+        <summary><strong>Industrial Age (Indy)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Howitzer + 6× Rogues</li>
+          <li>1× Howitzer + 7× Rogues (safer)</li>
+          <li>2× Tank + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Howitzer</li>
+          <li>6× Howitzer + 2× Tank</li>
+        </ul>
+      </details>
+
+      <!-- Progressive Era -->
+      <details>
+        <summary><strong>Progressive Era (PE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>8× Rapid Fire Cannon (easy auto)</li>
+          <li>2× Tank + 6× Rogues (higher attrition)</li>
+          <li>2× Rapid Fire Cannon + 6× Rogues (terrain dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Rapid Fire Cannon</li>
+          <li>6× Rapid Fire Cannon + 2× Tank</li>
+        </ul>
+      </details>
+
+      <!-- Modern Era -->
+      <details>
+        <summary><strong>Modern Era (ME)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Battle Tank + 6× Rogues</li>
+          <li>1× Battle Tank + 7× Rogues (safer)</li>
+          <li>2× Mechanized Artillery + 6× Rogues (vs heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Mechanized Artillery</li>
+          <li>6× Mechanized Artillery + 2× Battle Tank</li>
+        </ul>
+      </details>
+
+      <!-- Postmodern Era -->
+      <details>
+        <summary><strong>Postmodern Era (PME)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× MG Team + 6× Rogues</li>
+          <li>1× MG Team + 7× Rogues (safer)</li>
+          <li>2× Assault Tank + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× MG Team</li>
+          <li>6× MG Team + 2× Assault Tank</li>
+        </ul>
+      </details>
+
+      <!-- Contemporary Era -->
+      <details>
+        <summary><strong>Contemporary Era (CE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Anti-Aircraft Vehicle + 6× Rogues</li>
+          <li>1× Anti-Aircraft Vehicle + 7× Rogues (safer)</li>
+          <li>2× Main Battle Tank + 6× Rogues (vs fast-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Anti-Aircraft Vehicle</li>
+          <li>6× Anti-Aircraft Vehicle + 2× Main Battle Tank</li>
+        </ul>
+      </details>
+
+      <!-- Tomorrow Era -->
+      <details>
+        <summary><strong>Tomorrow Era (TE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Stealth Tank + 6× Rogues</li>
+          <li>1× Stealth Tank + 7× Rogues (safer)</li>
+          <li>2× Combat Drone + 6× Rogues (map dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Stealth Tank</li>
+          <li>6× Stealth Tank + 2× Combat Drone</li>
+        </ul>
+      </details>
+
+      <!-- Future Era -->
+      <details>
+        <summary><strong>Future Era (FE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Hover Tank + 6× Rogues</li>
+          <li>1× Hover Tank + 7× Rogues (higher attrition)</li>
+          <li>2× Drone Swarm + 6× Rogues (vs artillery-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Hover Tank</li>
+          <li>6× Hover Tank + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Arctic Future -->
+      <details>
+        <summary><strong>Arctic Future (AF)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Battle Fortress + 6× Rogues</li>
+          <li>1× Battle Fortress + 7× Rogues (safer)</li>
+          <li>2× Battle Fortress + 6× Rogues (manual often better)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Battle Fortress</li>
+          <li>6× Battle Fortress + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Oceanic Future -->
+      <details>
+        <summary><strong>Oceanic Future (OF)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Sub Cruiser + 6× Rogues</li>
+          <li>1× Sub Cruiser + 1× Turturret + 6× Rogues</li>
+          <li>8× Hydroelectric Eel (only if matchup favours it)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Sub Cruiser</li>
+          <li>6× Sub Cruiser + 2× Turturret</li>
+        </ul>
+      </details>
+
+      <!-- Virtual Future -->
+      <details>
+        <summary><strong>Virtual Future (VF)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Rocket Troop + 6× Rogues (safe auto)</li>
+          <li>1× Rocket Troop + 7× Rogues (safer)</li>
+          <li>2× Ronin Bot + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Rocket Troop</li>
+          <li>6× Rocket Troop + 2× Ronin Bot</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Mars -->
+      <details>
+        <summary><strong>Space Age Mars (SAM)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Sentinel + 6× Rogues</li>
+          <li>1× Sentinel + 7× Rogues (safer)</li>
+          <li>2× Sentinel + 6× Rogues (vs fast-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Sentinel</li>
+          <li>6× Sentinel + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Asteroid Belt -->
+      <details>
+        <summary><strong>Space Age Asteroid Belt (SAAB)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Nail Storm + 6× Rogues</li>
+          <li>1× Nail Storm + 7× Rogues (safer)</li>
+          <li>2× Nail Storm + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Nail Storm</li>
+          <li>6× Nail Storm + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Venus -->
+      <details>
+        <summary><strong>Space Age Venus (SAV)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Energy Cannon + 6× Rogues</li>
+          <li>1× Energy Cannon + 7× Rogues (safer)</li>
+          <li>2× Energy Cannon + 6× Rogues (matchup dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Energy Cannon</li>
+          <li>6× Energy Cannon + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Jupiter Moon -->
+      <details>
+        <summary><strong>Space Age Jupiter Moon (SAJM)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Harpoon Grenadier + 6× Rogues</li>
+          <li>1× Harpoon Grenadier + 7× Rogues (safer)</li>
+          <li>2× Harpoon Grenadier + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Harpoon Grenadier</li>
+          <li>6× Harpoon Grenadier + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Titan -->
+      <details>
+        <summary><strong>Space Age Titan (SAT)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Steel Warden + 6× Rogues (safe auto)</li>
+          <li>1× Steel Warden + 7× Rogues (higher attrition)</li>
+          <li>6–8× Steel Warden (vs fast-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Steel Warden</li>
+          <li>6× Steel Warden + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Space Hub -->
+      <details>
+        <summary><strong>Space Age Space Hub (SASH)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Space Marine + 6× Rogues (safe auto)</li>
+          <li>1× Space Marine + 7× Rogues (higher attrition)</li>
+          <li>2× Space Marine + 4–6× Rogues (awkward maps)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Space Marine</li>
+          <li>6× Space Marine + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Tips -->
+      <div class="grid" style="margin-top:14px">
+        <div class="col6">
+          <h3>Manual-fight tips (simple)</h3>
+          <ul>
+            <li>Focus-fire dangerous units first (enemy artillery/ranged).</li>
+            <li>Don’t sacrifice wounded units — keep them back.</li>
+            <li>Use cover/line-of-sight on tricky maps.</li>
+            <li>If your first two turns go bad, retreat and swap army.</li>
+          </ul>
+        </div>
+        <div class="col6">
+          <h3>Auto-battle safety tips</h3>
+          <ul>
+            <li>If you lose a unit twice in a row: consider stopping or going manual.</li>
+            <li>When fights start “costing” units, you’re near your safe attrition.</li>
+            <li>Once you are losing more than four units consistently, think about stopping.</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
+    <!-- ATTRITION -->
+    <div class="card" id="attrition">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 2l7 12-7 8-7-8 7-12z"/><path class="stroke2" d="M12 7v6M12 17h.01"/></svg>
+        </span>
+        Attrition Guide (When to Stop)
+      </h2>
+
+      <p>
+        Attrition is personal. The goal is to farm points without feeding units.
+        Your “safe” attrition depends on boosts, unit choice, and whether you manual-fight.
+      </p>
+
+      <div class="grid">
+        <div class="col6">
+          <h3>Easy rule of thumb</h3>
+          <div class="callout">
+            <ul style="margin:0 0 0 20px">
+              <li><strong>Keep going:</strong> you’re winning clean with minimal damage.</li>
+              <li><strong>Slow down:</strong> units are taking heavy hits or you’re replacing losses.</li>
+              <li><strong>Stop:</strong> stop before you start taking heavy losses.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col6">
+          <h3>Auto vs Manual</h3>
+          <ul>
+            <li><strong>Auto:</strong> fast and consistent, but can throw units away at higher attrition.</li>
+            <li><strong>Manual:</strong> takes longer, but pushes your safe attrition higher.</li>
+            <li><strong>Best method:</strong> auto until fights get rough, then manual key matchups.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <!-- GE -->
     <div class="card" id="ge">
-      <h2>Guild Expedition (GE)</h2>
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M4 20V6l8-3 8 3v14"/><path class="stroke2" d="M8 20V10h8v10"/></svg>
+        </span>
+        Guild Expedition (GE)
+      </h2>
+
       <p>GE is our weekly baseline. The goal is reliable contribution — not stress.</p>
 
       <div class="grid">
@@ -738,32 +931,43 @@
       </div>
     </div>
 
-    <!-- USEFUL LINKS -->
-<div class="card" id="links">
-  <h2>🔗 Useful Links</h2>
-  <p class="small">Quick tools that help with planning, Great Buildings, and general reference.</p>
+    <!-- LINKS -->
+    <div class="card" id="links">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1"/><path class="stroke2" d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 0 1-7-7l1-1"/></svg>
+        </span>
+        Useful Links
+      </h2>
 
-  <details open>
-    <summary>Tools & planners</summary>
-    <ul>
-      <li><a href="https://foe.tools/" target="_blank" rel="noopener">FOE Tools</a> <span class="small">— GB cost & reward calculators.</span></li>
-      <li><a href="https://foe-helper.com/" target="_blank" rel="noopener">FOE Helper</a> <span class="small">— browser extension with QoL tools.</span></li>
-      <li><a href="https://foe-city-builder.web.app/#/" target="_blank" rel="noopener">FOE City Planner</a> <span class="small">— optimise city layouts.</span></li>
-    </ul>
-  </details>
+      <p class="small">Quick tools that help with planning, Great Buildings, and general reference.</p>
 
-  <details>
-    <summary>Reference</summary>
-    <ul>
-      <li><a href="https://forgeofempires.fandom.com/" target="_blank" rel="noopener">FOE Wiki</a> <span class="small">— units, ages, mechanics.</span></li>
-      <li><a href="https://www.mooingcatguides.com/" target="_blank" rel="noopener">MooingCat Guides</a> <span class="small">— clear FOE guides.</span></li>
-    </ul>
-  </details>
-</div>
+      <details open>
+        <summary>Tools & planners</summary>
+        <ul>
+          <li><a href="https://foe.tools/" target="_blank" rel="noopener">FOE Tools</a> <span class="small">— GB cost & reward calculators.</span></li>
+          <li><a href="https://foe-helper.com/" target="_blank" rel="noopener">FOE Helper</a> <span class="small">— browser extension with QoL tools.</span></li>
+          <li><a href="https://foe-city-builder.web.app/#/" target="_blank" rel="noopener">FOE City Planner</a> <span class="small">— optimise city layouts.</span></li>
+        </ul>
+      </details>
 
-    <!-- 1.9 THREAD (updated to your correct posting format + examples) -->
+      <details>
+        <summary>Reference</summary>
+        <ul>
+          <li><a href="https://forgeofempires.fandom.com/" target="_blank" rel="noopener">FOE Wiki</a> <span class="small">— units, ages, mechanics.</span></li>
+          <li><a href="https://www.mooingcatguides.com/" target="_blank" rel="noopener">MooingCat Guides</a> <span class="small">— clear FOE guides.</span></li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- 1.9 THREAD -->
     <div class="card" id="thread19">
-      <h2>1.9 Thread (How to Post)</h2>
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M7 7h10v14H7z"/><path class="stroke2" d="M9 3h6v4H9zM9 11h6M9 15h6"/></svg>
+        </span>
+        1.9 Thread (How to Post)
+      </h2>
 
       <p>
         Post your Great Building with <strong>available spots only</strong>.
@@ -791,7 +995,13 @@
 
     <!-- MEMBERS -->
     <div class="card" id="members">
-      <h2>Members — Cirgard</h2>
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M16 11a4 4 0 1 0-8 0"/><path class="stroke2" d="M4 21a8 8 0 0 1 16 0"/><path class="stroke2" d="M12 13a5 5 0 0 1 5 5"/></svg>
+        </span>
+        Members — Cirgard
+      </h2>
+
       <p>
         <span class="tag found">👑 Founder</span>
         <span class="tag lead">⭐ Leader</span>
@@ -821,6 +1031,7 @@
   </main>
 
   <script>
+    // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Members + flags
@@ -871,6 +1082,21 @@
           <td>${badges(m.role)}</td>
         </tr>
       `).join("");
+
+    // active nav highlighting (nice touch, no content change)
+    const navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
+    const setActive = () => {
+      const y = window.scrollY + 120;
+      let current = sections[0]?.id || "home";
+      for (const s of sections){
+        if (s.offsetTop <= y) current = s.id;
+      }
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
+    };
+    window.addEventListener("scroll", setActive, {passive:true});
+    window.addEventListener("load", setActive);
   </script>
 </body>
 </html>
