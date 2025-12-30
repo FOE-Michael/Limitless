@@ -93,6 +93,20 @@
     .brand{
       display:flex; flex-direction:column; gap:6px;
     }
+    .brandRow{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .brandIcon{
+      width:64px;
+      height:64px;
+      flex:0 0 auto;
+      object-fit:contain;
+      filter: drop-shadow(0 0 14px rgba(255, 200, 80, 0.35));
+    }
+
+    
     h1{
       margin:0;
       font-size:34px;
@@ -350,9 +364,12 @@
       <div class="heroMedia" aria-hidden="true"></div>
 
       <div class="heroInner">
-        <div class="brand">
-          <h1>Limitless</h1>
-          <p class="subtitle">Forge of Empires Guild Hub — <strong>Cirgard</strong></p>
+        <div class="brandRow">
+          <img src="assets/limitless-emblem.png" alt="Limitless Guild Emblem" class="brandIcon">
+          <div class="brand">
+            <h1>Limitless</h1>
+            <p class="subtitle">Forge of Empires Guild Hub — <strong>Cirgard</strong></p>
+          </div>
         </div>
 
         <div class="heroBadges" aria-label="Guild badges">
