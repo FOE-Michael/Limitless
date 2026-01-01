@@ -305,13 +305,34 @@
     }
 
     /* FOOTER */
-    footer{
-      margin-top:40px;
-      padding:20px 0;
-      color:rgba(234,240,255,.55);
-      font-size:13px;
-      text-align:center;
-    }
+.siteFooter{
+  margin-top:40px;
+  padding:20px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:rgba(234,240,255,.55);
+  font-size:13px;
+  text-align:center;
+}
+
+.discordLink img{
+  width:36px;
+  height:36px;
+  opacity:0.75;
+  transition:opacity .2s ease, transform .2s ease, filter .2s ease;
+}
+
+.discordLink:hover img{
+  opacity:1;
+  transform:translateY(-2px);
+  filter:drop-shadow(0 0 10px rgba(88,101,242,.6));
+}
+
+.footerText{
+  opacity:.85;
+}
 
     /* icon strokes */
     .i{width:16px;height:16px}
@@ -1048,9 +1069,22 @@
       </details>
     </div>
 
-    <footer>
-      © <span id="year"></span> Limitless — Cirgard
-    </footer>
+    <footer class="siteFooter">
+  <a
+    href="https://discord.gg/5nZMpHSr"
+    target="_blank"
+    rel="noopener"
+    class="discordLink"
+    aria-label="Join Limitless on Discord"
+    title="Join Limitless on Discord"
+  >
+    <img src="assets/discord.svg" alt="Discord">
+  </a>
+
+  <div class="footerText">
+    © <span id="year"></span> Limitless — Cirgard
+  </div>
+</footer>
   </main>
 
   <script>
