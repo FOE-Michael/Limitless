@@ -320,14 +320,16 @@
 .discordLink img{
   width:36px;
   height:36px;
-  opacity:0.75;
-  transition:opacity .2s ease, transform .2s ease, filter .2s ease;
+  opacity:1;
+  filter: invert(33%) sepia(98%) saturate(1482%) hue-rotate(214deg) brightness(95%) contrast(101%);
+  transition:transform .2s ease, filter .2s ease;
 }
 
 .discordLink:hover img{
-  opacity:1;
   transform:translateY(-2px);
-  filter:drop-shadow(0 0 10px rgba(88,101,242,.6));
+  filter:
+    invert(33%) sepia(98%) saturate(1482%) hue-rotate(214deg) brightness(110%) contrast(110%)
+    drop-shadow(0 0 8px rgba(88,101,242,.6));
 }
 
 .footerText{
