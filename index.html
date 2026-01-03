@@ -304,14 +304,76 @@
       white-space:pre-wrap;
     }
 
-    /* FOOTER */
-    footer{
-      margin-top:40px;
-      padding:20px 0;
-      color:rgba(234,240,255,.55);
-      font-size:13px;
-      text-align:center;
-    }
+    /* QI resource card + buttons */
+.resourceCard{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 14px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:calc(var(--radius) - 2px);
+  background:rgba(0,0,0,.12);
+}
+.resourceTitle{font-weight:800}
+.resourceMeta{color:var(--muted); font-size:13px; margin-top:2px}
+.resourceActions{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+}
+.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
+.btnPrimary{
+  border-color:rgba(34,211,238,.35);
+  background:rgba(34,211,238,.12);
+}
+.btnPrimary:hover{background:rgba(34,211,238,.16)}
+@media (max-width:720px){
+  .resourceCard{flex-direction:column; align-items:flex-start}
+  .resourceActions{width:100%}
+  .resourceActions .btn{flex:1}
+}
+
+/* FOOTER */
+.siteFooter{
+  margin-top:40px;
+  padding:20px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:rgba(234,240,255,.55);
+  font-size:13px;
+  text-align:center;
+}
+
+.discordLink img{
+  width:36px;
+  height:36px;
+  opacity:1;
+  filter: invert(33%) sepia(98%) saturate(1482%) hue-rotate(214deg) brightness(95%) contrast(101%);
+  transition:transform .2s ease, filter .2s ease;
+}
+
+.discordLink:hover img{
+  transform:translateY(-2px);
+  filter:
+    invert(33%) sepia(98%) saturate(1482%) hue-rotate(214deg) brightness(110%) contrast(110%)
+    drop-shadow(0 0 8px rgba(88,101,242,.6));
+}
+
+.footerText{
+  opacity:.85;
+}
 
     /* icon strokes */
     .i{width:16px;height:16px}
@@ -329,70 +391,7 @@
       stroke-linecap:round;
       stroke-linejoin:round;
     }
-  
-    /* QI resource card + buttons */
-    .resourceCard{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 14px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(255,255,255,.03);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-      margin-top:10px;
-    }
-    .resourceInfo{flex:1; min-width:0}
-    .resourceTitle{font-weight:800}
-    .resourceMeta{color:var(--muted); font-size:13px; margin-top:2px}
-    .resourceActions{display:flex; gap:10px; flex-wrap:wrap}
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      border-radius:12px;
-      border:1px solid var(--border2);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:700;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .btn:hover{
-      background:rgba(255,255,255,.08);
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.18);
-    }
-    .btnPrimary{
-      border-color: rgba(34,211,238,.35);
-      background: linear-gradient(135deg, rgba(124,58,237,.55), rgba(34,211,238,.45));
-    }
-    .btnPrimary:hover{
-      border-color: rgba(34,211,238,.55);
-      background: linear-gradient(135deg, rgba(124,58,237,.65), rgba(34,211,238,.55));
-    }
-
-    .note{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px dashed rgba(255,255,255,.18);
-      background:rgba(255,255,255,.03);
-      color:rgba(234,240,255,.92);
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    @media (max-width: 720px){
-      .resourceCard{flex-direction:column; align-items:stretch}
-      .resourceActions{width:100%}
-      .btn{width:100%}
-    }
-
-\1
+  </style>
 </head>
 
 <body>
@@ -414,6 +413,7 @@
       <a href="#fighting">Fighting</a>
       <a href="#attrition">Attrition</a>
       <a href="#ge">GE</a>
+      <a href="#qi">QI</a>
       <a href="#links">Links</a>
       <a href="#thread19">1.9 Thread</a>
       <a href="#members">Members</a>
@@ -559,7 +559,7 @@
           <ul>
             <li><strong>Hit called sectors</strong> (avoid random hits).</li>
             <li><strong>Respect locks</strong>: if a sector is locked, don’t touch it unless told.</li>
-            <li><strong>Build for max support</strong> while maintaing the treasury.</li>
+            <li><strong>Build for max support</strong> while maintaining the treasury.</li>
             <li>Do not delete buildings even if the sector is being taken.</li>
             <li>When in doubt: pause and ask.</li>
           </ul>
@@ -1017,6 +1017,75 @@
       </div>
     </div>
 
+    <section id="qi" class="card">
+  <h2>
+    <span class="icon" aria-hidden="true">
+      <svg class="i" viewBox="0 0 24 24">
+        <path class="stroke" d="M12 3l7 7-7 11L5 10l7-7z"/>
+        <path class="stroke2" d="M12 3v18"/>
+      </svg>
+    </span>
+    Quantum Incursions (QI)
+  </h2>
+
+  <p>
+    QI is a <strong>side mode</strong> for us right now — our main focus is still <strong>GBG</strong> and <strong>GE</strong>.
+    That said, we’ve got some seriously strong QI players in Limitless, and we <strong>do</strong> want to support anyone who enjoys it.
+  </p>
+
+  <div class="grid">
+    <div class="col6">
+      <h3>How we approach QI</h3>
+      <ul>
+        <li><strong>No strict expectations</strong> (no sector calling / no “must-hit” rules at this stage).</li>
+        <li>Play your own style — fighting, negotiating, or building economy.</li>
+        <li>Ask questions in chat if you want help optimising your QI city.</li>
+      </ul>
+    </div>
+
+    <div class="col6">
+      <h3>“I don’t play much — can I still help?”</h3>
+      <p class="small" style="margin:0">
+        Yep. Even casual players can contribute in a meaningful way:
+      </p>
+      <ul>
+        <li>Drop a few <strong>simple supply buildings</strong> in your QI city.</li>
+        <li>Collect when you can.</li>
+        <li>Donate your <strong>supplies / goods</strong> into the guild pool.</li>
+      </ul>
+      <p class="small" style="margin:0">
+        Small, consistent donations add up fast — especially from members who don’t have time to fully play the mode.
+      </p>
+    </div>
+  </div>
+
+  <hr class="sep" />
+
+  <h3>Optional QI Guide (for anyone who wants it)</h3>
+
+  <div class="resourceCard">
+    <div>
+      <div class="resourceTitle">The Alchemist — Middle Ages — Fighter (Guide)</div>
+      <div class="resourceMeta">
+        Optional resource • for people who want to push QI harder • not compulsory
+      </div>
+    </div>
+
+    <div class="resourceActions">
+      <a class="btn" href="assets/qi-alchemist-middleages-fighter.pdf" target="_blank" rel="noopener">
+        View
+      </a>
+      <a class="btn btnPrimary" href="assets/qi-alchemist-middleages-fighter.pdf" download>
+        Download
+      </a>
+    </div>
+  </div>
+
+  <p class="small" style="margin-top:10px">
+    If you’re one of our QI grinders: legend. If you’re casual: still valuable. Either way, you’re welcome here.
+  </p>
+</section>
+
     <!-- LINKS -->
     <div class="card" id="links">
       <h2>
@@ -1111,9 +1180,22 @@
       </details>
     </div>
 
-    <footer>
-      © <span id="year"></span> Limitless — Cirgard
-    </footer>
+    <footer class="siteFooter">
+  <a
+    href="https://discord.gg/5nZMpHSr"
+    target="_blank"
+    rel="noopener"
+    class="discordLink"
+    aria-label="Join Limitless on Discord"
+    title="Join Limitless on Discord"
+  >
+    <img src="assets/discord.svg" alt="Discord">
+  </a>
+
+  <div class="footerText">
+    © <span id="year"></span> Limitless — Cirgard
+  </div>
+</footer>
   </main>
 
   <script>
