@@ -1460,38 +1460,38 @@
       return b.join(" ") || "—";
     }
 
-   // Sort: Founder(+others) > Founder-only > Leader(+others) > Leader-only > Members
-// Within each tier, GBG Contact gets a small boost, then A–Z.
-members.sort((a, b) => {
+  members.sort((a, b) => {
+  // 1️⃣ Hard-coded pin priority (lower = higher)
+  const manualPriority = {
+    "Brt the bright": 0,   // <-- YOU at absolute top
+    "Foundation": 1,
+    "Variety the Great": 2
+  };
+
+  const priority = name =>
+    manualPriority[name] !== undefined
+      ? manualPriority[name]
+      : 99;
+
+  if (priority(a.name) !== priority(b.name)) {
+    return priority(a.name) - priority(b.name);
+  }
+
+  // 2️⃣ Then normal role hierarchy
   const norm = role =>
     (Array.isArray(role) ? role : [role])
-      .filter(Boolean)
-      .map(r => String(r).toLowerCase());
+      .map(r => r.toLowerCase());
 
   const rank = role => {
     const roles = norm(role);
-
-    const hasFounder = roles.includes("founder");
-    const hasLeader  = roles.includes("leader");
-
-    if (hasFounder && roles.length > 1) return 0; // Founder + others
-    if (hasFounder)                     return 1; // Founder only
-    if (hasLeader && roles.length > 1)  return 2; // Leader + others
-    if (hasLeader)                      return 3; // Leader only
-    return 4;                                     // Member / other
+    if (roles.includes("founder")) return 0;
+    if (roles.includes("leader"))  return 1;
+    if (roles.some(r => r.includes("gbg"))) return 2;
+    return 3;
   };
 
-  const gbgBoost = role => {
-    const roles = norm(role);
-    const hasGBG = roles.some(r => r.includes("gbg"));
-    return hasGBG ? 0 : 1; // 0 sorts before 1 (i.e., GBG first within the tier)
-  };
-
-  return (
-    rank(a.role) - rank(b.role) ||
-    gbgBoost(a.role) - gbgBoost(b.role) ||
-    a.name.localeCompare(b.name)
-  );
+  return rank(a.role) - rank(b.role)
+    || a.name.localeCompare(b.name);
 });
 
     document.getElementById("memberRows").innerHTML =
