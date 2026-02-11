@@ -1460,38 +1460,50 @@
       return b.join(" ") || "—";
     }
 
-  members.sort((a, b) => {
-  // 1️⃣ Hard-coded pin priority (lower = higher)
-  const manualPriority = {
-    "Brt the bright": 0,   // <-- YOU at absolute top
-    "Foundation": 1,
-    "Variety the Great": 2
-  };
+  // ---- SORTING (Katsu pinned top + manual pins + role tiers) ----
+const key = s => String(s || "").trim().toLowerCase();
 
-  const priority = name =>
-    manualPriority[name] !== undefined
-      ? manualPriority[name]
-      : 99;
+// 0 = highest priority
+const manualPriority = {
+  [key("KatsuChicken")]: 0,     // <-- PINNED TOP
+  [key("Brt the bright")]: 1,
+  [key("Foundation")]: 2,
+  [key("Variety the Great")]: 3,
+};
 
-  if (priority(a.name) !== priority(b.name)) {
-    return priority(a.name) - priority(b.name);
-  }
+const priority = name => manualPriority[key(name)] ?? 99;
 
-  // 2️⃣ Then normal role hierarchy
-  const norm = role =>
-    (Array.isArray(role) ? role : [role])
-      .map(r => r.toLowerCase());
+const rank = role => {
+  const r = String(role || "").toLowerCase().trim();
+  const hasFounder = r.includes("founder");
+  const hasLeader  = r.includes("leader");
 
-  const rank = role => {
-    const roles = norm(role);
-    if (roles.includes("founder")) return 0;
-    if (roles.includes("leader"))  return 1;
-    if (roles.some(r => r.includes("gbg"))) return 2;
-    return 3;
-  };
+  // Founder(+others) > Founder-only > Leader(+others) > Leader-only > Members
+  if (hasFounder && r !== "founder") return 0;
+  if (hasFounder)                    return 1;
+  if (hasLeader  && r !== "leader")  return 2;
+  if (hasLeader)                     return 3;
+  return 4;
+};
 
-  return rank(a.role) - rank(b.role)
-    || a.name.localeCompare(b.name);
+const gbgBoost = role =>
+  String(role || "").toLowerCase().includes("gbg") ? 0 : 1;
+
+members.sort((a, b) => {
+  // 1) hard pins (Katsu first)
+  const pa = priority(a.name), pb = priority(b.name);
+  if (pa !== pb) return pa - pb;
+
+  // 2) role tiers
+  const ra = rank(a.role), rb = rank(b.role);
+  if (ra !== rb) return ra - rb;
+
+  // 3) GBG boost inside tier
+  const ga = gbgBoost(a.role), gb = gbgBoost(b.role);
+  if (ga !== gb) return ga - gb;
+
+  // 4) A–Z
+  return a.name.localeCompare(b.name);
 });
 
     document.getElementById("memberRows").innerHTML =
