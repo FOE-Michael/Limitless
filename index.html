@@ -586,7 +586,7 @@
 
 .imgCard img{
   width:100%;
-  height:240px;                 /* tall enough to include shield + heading */
+  height:260px;                 /* tall enough to include shield + heading */
   object-fit:cover;
   display:block;
   border-top:1px solid rgba(255,255,255,.08);
@@ -595,21 +595,21 @@
 }
 
 /* Per-image focus (slightly different for red vs blue) */
-.imgCard.imgRed img{object-position:left 22% top 10%;}
-.imgCard.imgBlue img{object-position:left 22% top 14%;}
+.imgCard.imgRed img{object-position:left 22% top 4%;}
+.imgCard.imgBlue img{object-position:left 22% top 6%;}
 
 /* Desktop: still crop, but aim at the shield (no more center-crop hiding it) */
 @media (min-width: 900px){
   .imgCard img{height:220px;}
-  .imgCard.imgRed img{object-position:left 18% top 12%;}
-  .imgCard.imgBlue img{object-position:left 18% top 14%;}
+  .imgCard.imgRed img{object-position:left 18% top 6%;}
+  .imgCard.imgBlue img{object-position:left 18% top 7%;}
 }
 
 /* Phone landscape: wider/shorter viewport needs a bit more height */
 @media (max-height: 480px) and (orientation: landscape){
   .imgCard img{height:260px;}
-  .imgCard.imgRed img{object-position:left 20% top 10%;}
-  .imgCard.imgBlue img{object-position:left 20% top 12%;}
+  .imgCard.imgRed img{object-position:left 20% top 5%;}
+  .imgCard.imgBlue img{object-position:left 20% top 6%;}
 }
 
 /* Small phones */
