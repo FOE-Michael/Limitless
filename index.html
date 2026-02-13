@@ -463,17 +463,7 @@
     }
     .imgCard .imgTop{display:flex; align-items:center; gap:10px; padding:12px 12px 8px}
     .imgCard .imgTop strong{color:#fff}
-    .imgCard img{
-      width:100%;
-      display:block;
-      background: rgba(0,0,0,.20);
-      border-top: 1px solid rgba(255,255,255,.08);
-      max-height:170px;              /* zoom in slightly */
-      object-fit: cover;
-      object-position:left 28% top 35%; /* focus on shield */
     
-  filter:saturate(1.05) contrast(1.05);
-}
     .imgCard .imgBody{padding:10px 12px 12px; color:var(--muted); font-size:13.5px; line-height:1.45}
     @media (max-width:900px){ .imgCard{grid-column:span 12;} }
 
@@ -509,13 +499,46 @@
       .imgCard{grid-column: span 12;}
 
       /* Reduce image height slightly on phones for better rhythm */
-      .imgCard img{max-height: 150px;}
+      
 
       /* Nav: allow horizontal scroll without wrapping */
       nav{overflow-x:auto; -webkit-overflow-scrolling: touch;}
       nav::-webkit-scrollbar{display:none;}
       nav a{flex: 0 0 auto;}
     }
+
+
+/* --- GBG Shield Image System (v5 responsive refinement) --- */
+
+/* Default = phone portrait (designed look) */
+.imgCard img{
+  width:100%;
+  display:block;
+  height:220px;
+  object-fit:cover;
+  object-position:left 28% top 45%;
+  border-top:1px solid rgba(255,255,255,.08);
+  filter:saturate(1.05) contrast(1.05);
+  background: rgba(0,0,0,.18);
+}
+
+/* Desktop / wide screens: show full UI cleanly */
+@media (min-width: 900px){
+  .imgCard img{
+    height:260px;
+    object-fit:contain;
+    object-position:left center;
+  }
+}
+
+/* Phone landscape: prevent ultra-wide crop */
+@media (max-height: 480px) and (orientation: landscape){
+  .imgCard img{
+    height:220px;
+    object-fit:contain;
+    object-position:left center;
+  }
+}
 
 </style>
 </head>
