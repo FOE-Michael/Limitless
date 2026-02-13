@@ -453,12 +453,6 @@
     @media (max-width:900px){ .mini{grid-column:span 12;} }
 
     
-/* Image card (GBG shields) */
-.imgRow{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:20px;
-}
 
 .imgCard{
   overflow:hidden;
@@ -539,7 +533,7 @@
     }
 
 
-/* --- GBG Shield Image System (v5 responsive refinement) --- */
+
 
 /* Default = phone portrait (designed look) */
 .imgCard img{
@@ -569,6 +563,58 @@
     object-fit:contain;
     object-position:left center;
   }
+}
+
+
+/* --- GBG Shield Images (v7) --- */
+/* Goal: keep the SHIELD visible on all devices, especially desktop + landscape */
+
+.imgRow{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
+
+.imgCard{
+  overflow:hidden;
+  border-radius:16px;
+  width:100%;
+}
+
+.imgLink{display:block;}
+.imgLink img{cursor: zoom-in;}
+
+.imgCard img{
+  width:100%;
+  height:240px;                 /* tall enough to include shield + heading */
+  object-fit:cover;
+  display:block;
+  border-top:1px solid rgba(255,255,255,.08);
+  filter:saturate(1.05) contrast(1.05);
+  background: rgba(0,0,0,.18);
+}
+
+/* Per-image focus (slightly different for red vs blue) */
+.imgCard.imgRed img{object-position:left 22% top 10%;}
+.imgCard.imgBlue img{object-position:left 22% top 14%;}
+
+/* Desktop: still crop, but aim at the shield (no more center-crop hiding it) */
+@media (min-width: 900px){
+  .imgCard img{height:220px;}
+  .imgCard.imgRed img{object-position:left 18% top 12%;}
+  .imgCard.imgBlue img{object-position:left 18% top 14%;}
+}
+
+/* Phone landscape: wider/shorter viewport needs a bit more height */
+@media (max-height: 480px) and (orientation: landscape){
+  .imgCard img{height:260px;}
+  .imgCard.imgRed img{object-position:left 20% top 10%;}
+  .imgCard.imgBlue img{object-position:left 20% top 12%;}
+}
+
+/* Small phones */
+@media (max-width: 600px){
+  .imgCard img{height:260px;}
 }
 
 </style>
@@ -797,7 +843,7 @@
       <div class="divider"></div>
 
       <div class="imgRow">
-        <div class="imgCard">
+        <div class="imgCard imgRed">
           <div class="imgTop">
             <span class="tag neutral">🔴</span>
             <strong>Red Shield = Attack sector</strong>
@@ -805,10 +851,10 @@
           <div class="imgBody">
             Red shield means your <strong>attacking army’s attack/boost</strong> matters most.
           </div>
-          <img src="assets/gbg-red-shield.png" alt="GBG red shield (attack sector)">
+          <a class="imgLink" href="assets/gbg-red-shield.png" target="_blank" rel="noopener"><img src="assets/gbg-red-shield.png" alt="GBG red shield (attack sector)"></a>
         </div>
 
-        <div class="imgCard">
+        <div class="imgCard imgBlue">
           <div class="imgTop">
             <span class="tag neutral">🔵</span>
             <strong>Blue Shield = Defense sector</strong>
@@ -816,7 +862,7 @@
           <div class="imgBody">
             Blue shield means your <strong>attacking army’s defense/boost</strong> matters most.
           </div>
-          <img src="assets/gbg-blue-shield.png" alt="GBG blue shield (defense sector)">
+          <a class="imgLink" href="assets/gbg-blue-shield.png" target="_blank" rel="noopener"><a class="imgLink" href="assets/gbg-blue-shield.png" target="_blank" rel="noopener"><img src="assets/gbg-blue-shield.png" alt="GBG blue shield (defense sector)"></a></a>
         </div>
       </div>
 
