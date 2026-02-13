@@ -566,8 +566,11 @@
 }
 
 
-/* --- GBG Shield Images (v7) --- */
-/* Goal: keep the SHIELD visible on all devices, especially desktop + landscape */
+
+/* --- GBG Shield Images (v10) --- */
+/* Goal: ALWAYS show the shield clearly. 
+   Mobile portrait: nice crop.
+   Desktop + landscape: show the whole screenshot (no cropping), even if letterboxed. */
 
 .imgRow{
   display:grid;
@@ -579,43 +582,51 @@
   overflow:hidden;
   border-radius:16px;
   width:100%;
+  background: rgba(0,0,0,.18);
 }
 
 .imgLink{display:block;}
 .imgLink img{cursor: zoom-in;}
 
+/* Default (mobile portrait / narrow screens): crop to keep shield large */
 .imgCard img{
   width:100%;
-  height:260px;                 /* tall enough to include shield + heading */
+  height:260px;
   object-fit:cover;
+  object-position:left 20% top 6%;
   display:block;
   border-top:1px solid rgba(255,255,255,.08);
   filter:saturate(1.05) contrast(1.05);
-  background: rgba(0,0,0,.18);
 }
 
-/* Per-image focus (slightly different for red vs blue) */
-.imgCard.imgRed img{object-position:left 22% top 4%;}
-.imgCard.imgBlue img{object-position:left 22% top 6%;}
-
-/* Desktop: still crop, but aim at the shield (no more center-crop hiding it) */
-@media (min-width: 900px){
+/* Small phones: a touch shorter */
+@media (max-width: 480px){
   .imgCard img{height:220px;}
-  .imgCard.imgRed img{object-position:left 18% top 6%;}
-  .imgCard.imgBlue img{object-position:left 18% top 7%;}
 }
 
-/* Phone landscape: wider/shorter viewport needs a bit more height */
-@media (max-height: 480px) and (orientation: landscape){
-  .imgCard img{height:260px;}
-  .imgCard.imgRed img{object-position:left 20% top 5%;}
-  .imgCard.imgBlue img{object-position:left 20% top 6%;}
+/* Desktop & wider screens: show the full image (no crop) */
+@media (min-width: 900px){
+  .imgCard img{
+    height:auto;
+    max-height:340px;
+    object-fit:contain;
+    object-position:center;
+    background: rgba(0,0,0,.25);
+  }
 }
 
-/* Small phones */
-@media (max-width: 600px){
-  .imgCard img{height:260px;}
+/* Phone landscape: also show full image (cropping looks bad in landscape) */
+@media (max-height: 520px) and (orientation: landscape){
+  .imgCard img{
+    height:auto;
+    max-height:360px;
+    object-fit:contain;
+    object-position:center;
+    background: rgba(0,0,0,.25);
+  }
 }
+
+</style>
 
 </style>
 </head>
