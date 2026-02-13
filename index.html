@@ -48,17 +48,7 @@
     }
 
 *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(900px 520px at 20% 0%, rgba(124,58,237,.22), transparent 65%),
-        radial-gradient(900px 520px at 80% 0%, rgba(34,211,238,.16), transparent 65%),
-        var(--bg);
-      color:var(--text);
-    }
-    a{color:inherit}
+    html,a{color:inherit}
     .wrap{max-width:1150px;margin:auto;padding:16px}
 
     /* HERO */
@@ -400,11 +390,28 @@
   
     /* --- V2 polish --- */
     body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:#050814; /* solid fallback */
+      color:var(--text);
+      min-height:100%;
+      position:relative;
+      overflow-x:hidden;
+    }
+    /* Fixed site-wide background so the glow doesn't "restart" between sections */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
       background:
-        radial-gradient(1100px 620px at 18% 0%, rgba(124,58,237,.22), transparent 62%),
-        radial-gradient(1000px 560px at 82% 0%, rgba(34,211,238,.16), transparent 62%),
-        radial-gradient(900px 520px at 50% 120%, rgba(255, 200, 80, .08), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+        radial-gradient(900px 520px at 18% 6%, rgba(124,58,237,.20), transparent 62%),
+        radial-gradient(1000px 560px at 82% 10%, rgba(34,211,238,.14), transparent 64%),
+        radial-gradient(900px 640px at 55% 92%, rgba(59,130,246,.10), transparent 62%),
+        radial-gradient(700px 520px at 10% 75%, rgba(16,185,129,.07), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,0) 40%, rgba(0,0,0,.35));
+      transform:translateZ(0);
     }
 
     .card{
