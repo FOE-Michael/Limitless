@@ -1,0 +1,1733 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Limitless — Cirgard Guild Hub</title>
+  
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+  <!--
+    VISUALS SETUP (GitHub Pages)
+    1) Create a folder in your repo: /assets/
+    2) Upload:
+        - /assets/hero.jpg  (your chosen hero/banner image)
+        - /assets/icon.svg  (optional favicon)
+    3) Update the --hero-image URL below if you use a different filename.
+  -->
+
+  <style>
+    :root{
+      /* Base */
+      --bg:#050712;
+      --bg2:#070A18;
+      --panel: rgba(255,255,255,.055);
+      --panel2: rgba(255,255,255,.035);
+      --text:#eaf0ff;
+      --muted: rgba(234,240,255,.72);
+      --muted2: rgba(234,240,255,.58);
+      --border: rgba(255,255,255,.12);
+      --border2: rgba(255,255,255,.08);
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --shadowSoft: 0 10px 28px rgba(0,0,0,.38);
+      --radius: 18px;
+
+      /* Accent system (Limitless) */
+      --a1: rgba(124,58,237,.60);   /* purple */
+      --a2: rgba(34,211,238,.55);   /* cyan */
+      --gold: rgba(255, 200, 80, .95);
+      --goldSoft: rgba(255, 200, 80, .30);
+      --glow: 0 0 0 1px rgba(255,255,255,.07), 0 18px 65px rgba(0,0,0,.35);
+
+      /* Hero image */
+      --hero-image: url("assets/hero.jpg");
+    }
+
+*{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(900px 520px at 20% 0%, rgba(124,58,237,.22), transparent 65%),
+        radial-gradient(900px 520px at 80% 0%, rgba(34,211,238,.16), transparent 65%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1150px;margin:auto;padding:16px}
+
+    /* HERO */
+    header.hero{
+      padding:18px 0 10px;
+    }
+    .heroCard{
+      position:relative;
+      border-radius:calc(var(--radius) + 6px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        radial-gradient(900px 420px at 10% 0%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 420px at 90% 0%, rgba(34,211,238,.14), transparent 60%),
+        rgba(0,0,0,.18);
+      box-shadow: var(--shadow);
+    }
+    .heroMedia{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(90deg, rgba(5,7,18,.85) 0%, rgba(5,7,18,.55) 48%, rgba(5,7,18,.88) 100%),
+        var(--hero-image);
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.03);
+    }
+    .heroInner{
+      position:relative;
+      display:flex;
+      gap:16px;
+      align-items:flex-end;
+      justify-content:space-between;
+      padding:22px 22px 18px;
+      min-height: 170px;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .brandRow{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .brandIcon{
+      width:64px;
+      height:64px;
+      flex:0 0 auto;
+      object-fit:contain;
+      filter: drop-shadow(0 0 14px rgba(255, 200, 80, 0.35));
+    }
+
+    
+    h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:.2px;
+      line-height:1.1;
+      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
+    .subtitle{
+      margin:0;
+      color:rgba(234,240,255,.85);
+      text-shadow: 0 10px 30px rgba(0,0,0,.55);
+    }
+    .heroBadges{
+      display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;
+      max-width: 520px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--glow);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .badge svg{opacity:.95}
+
+    /* NAV */
+    hr.sep{border:0;border-top:1px solid var(--border2);margin:14px 0 0}
+    nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(5,7,18,.70);
+      border-bottom:1px solid var(--border);
+    }
+    nav .wrap{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+      padding:10px 16px;
+    }
+    nav a{
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      text-decoration:none;
+      font-size:14px;
+      color:var(--text);
+      background:rgba(255,255,255,.02);
+    }
+    nav a:hover{background:rgba(255,255,255,.05)}
+    nav a.active{background:rgba(255,255,255,.08)}
+    nav .pill{
+      margin-left:auto;
+      padding:8px 12px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(124,58,237,.25), rgba(34,211,238,.18));
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+      font-size:13px;
+      display:flex;gap:8px;align-items:center;
+      white-space:nowrap;
+    }
+
+    /* CARDS + LAYOUT */
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      margin-top:16px;
+      box-shadow:var(--shadow);
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:22px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .card h2 .icon{
+      width:22px;height:22px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      border-radius:10px;
+      background: linear-gradient(135deg, rgba(124,58,237,.22), rgba(34,211,238,.14));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--glow);
+    }
+    .card h3{margin:14px 0 8px;font-size:16px;color:#fff}
+    .card p{margin:8px 0;color:var(--muted);line-height:1.45}
+    .card ul{margin:8px 0 0 20px;color:var(--muted);line-height:1.55}
+    .small{font-size:13px;color:var(--muted)}
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin:12px 0 0;
+    }
+
+    .grid{display:grid;grid-template-columns:repeat(12, 1fr);gap:14px}
+    .col6{grid-column:span 6}
+    .col4{grid-column:span 4}
+    .col8{grid-column:span 8}
+
+    @media (max-width:900px){
+      .col6,.col4,.col8{grid-column:span 12}
+      nav .pill{margin-left:0;width:100%;text-align:center;justify-content:center}
+      .heroInner{flex-direction:column; align-items:flex-start}
+      .heroBadges{justify-content:flex-start}
+    }
+
+    /* TAGS */
+    .tag{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid var(--border);
+      margin-right:6px;
+      background:rgba(255,255,255,.04);
+    }
+    .found{border-color:#34d399}
+    .lead{border-color:#fbbf24}
+    .gbg{border-color:#22d3ee}
+    .good{border-color:rgba(52,211,153,.55)}
+    .warn{border-color:rgba(251,191,36,.55)}
+    .neutral{border-color:rgba(255,255,255,.18)}
+
+    /* CALLOUT */
+    .callout{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:12px;
+    }
+    .callout strong{color:#fff}
+
+    /* TABLES */
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      overflow:hidden;
+      border-radius:14px;
+    }
+    th,td{
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+    }
+    thead th{
+      color:#fff;
+      font-weight:600;
+      font-size:13px;
+      background:rgba(255,255,255,.03);
+    }
+    tbody tr:hover{background:rgba(255,255,255,.03)}
+
+    /* DETAILS */
+    details{
+      margin-top:10px;
+      border:1px solid var(--border2);
+      border-radius:14px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.03);
+    }
+    summary{cursor:pointer;color:#fff}
+    details[open]{box-shadow: inset 0 0 0 1px rgba(255,255,255,.04)}
+
+    /* CODE BLOCKS */
+    code.inline{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      padding:2px 6px;
+      border-radius:8px;
+      color:#fff;
+      font-size:12px;
+      text-align:left;
+      display:inline-block;
+    }
+    pre.code-block{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      padding:12px;
+      border-radius:14px;
+      color:#fff;
+      font-size:13px;
+      line-height:1.5;
+      overflow:auto;
+      margin:10px 0 14px;
+      white-space:pre-wrap;
+    }
+
+    /* QI resource card + buttons */
+.resourceCard{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 14px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:calc(var(--radius) - 2px);
+  background:rgba(0,0,0,.12);
+}
+.resourceTitle{font-weight:800}
+.resourceMeta{color:var(--muted); font-size:13px; margin-top:2px}
+.resourceActions{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+}
+.btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.09)}
+.btnPrimary{
+  border-color:rgba(34,211,238,.35);
+  background:rgba(34,211,238,.12);
+}
+.btnPrimary:hover{background:rgba(34,211,238,.16)}
+@media (max-width:720px){
+  .resourceCard{flex-direction:column; align-items:flex-start}
+  .resourceActions{width:100%}
+  .resourceActions .btn{flex:1}
+}
+
+/* FOOTER */
+.siteFooter{
+  margin-top:40px;
+  padding:20px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:rgba(234,240,255,.55);
+  font-size:13px;
+  text-align:center;
+}
+
+.discordLink img{
+  width:36px;
+  height:36px;
+  opacity:1;
+  filter: invert(33%) sepia(98%) saturate(1482%) hue-rotate(214deg) brightness(95%) contrast(101%);
+  transition:transform .2s ease, filter .2s ease;
+}
+
+.discordLink:hover img{
+  transform:translateY(-2px);
+  filter:
+    invert(33%) sepia(98%) saturate(1482%) hue-rotate(214deg) brightness(110%) contrast(110%)
+    drop-shadow(0 0 8px rgba(88,101,242,.6));
+}
+
+.footerText{
+  opacity:.85;
+}
+
+    /* icon strokes */
+    .i{width:16px;height:16px}
+    .stroke{
+      fill:none;
+      stroke: url(#g);
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+    .stroke2{
+      fill:none;
+      stroke: rgba(234,240,255,.78);
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+  
+    /* --- V2 polish --- */
+    body{
+      background:
+        radial-gradient(1100px 620px at 18% 0%, rgba(124,58,237,.22), transparent 62%),
+        radial-gradient(1000px 560px at 82% 0%, rgba(34,211,238,.16), transparent 62%),
+        radial-gradient(900px 520px at 50% 120%, rgba(255, 200, 80, .08), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+
+    .card{
+      position:relative;
+      overflow:hidden;
+      box-shadow: var(--shadowSoft);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(520px 220px at 10% 0%, rgba(124,58,237,.14), transparent 65%),
+        radial-gradient(520px 220px at 90% 0%, rgba(34,211,238,.11), transparent 65%);
+      pointer-events:none;
+      opacity:.55;
+    }
+    .card > *{ position:relative; }
+    .card:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.16);
+      box-shadow: var(--shadow);
+    }
+
+    nav a{
+      transition: background .15s ease, transform .15s ease, border-color .15s ease;
+    }
+    nav a:hover{transform:translateY(-1px); border-color: rgba(255,255,255,.18);}
+
+    /* Section headers */
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom: 10px;
+    }
+    .sectionHead p{ margin:6px 0 0; color:var(--muted); max-width: 62ch; }
+
+    /* Mini cards / feature blocks */
+    .miniGrid{display:grid; grid-template-columns:repeat(12,1fr); gap:12px; margin-top:10px}
+    .mini{grid-column:span 6; padding:14px; border-radius:calc(var(--radius) - 4px);
+      background: rgba(0,0,0,.14);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .mini h4{margin:0 0 8px; font-size:15px; color:#fff}
+    .mini p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.45}
+    .mini ul{margin:8px 0 0 18px; color:var(--muted); line-height:1.55}
+    @media (max-width:900px){ .mini{grid-column:span 12;} }
+
+    /* Image card (for GBG shields) */
+    .imgRow{display:grid; grid-template-columns:repeat(12,1fr); gap:12px; margin-top:10px}
+    .imgCard{
+      grid-column:span 6;
+      border-radius:calc(var(--radius) - 4px);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+      overflow:hidden;
+    }
+    .imgCard .imgTop{display:flex; align-items:center; gap:10px; padding:12px 12px 8px}
+    .imgCard .imgTop strong{color:#fff}
+    .imgCard img{
+      width:100%;
+      display:block;
+      background: rgba(0,0,0,.20);
+      border-top: 1px solid rgba(255,255,255,.08);
+      max-height: 220px;
+      object-fit: cover;
+      object-position: left top;
+    }
+    .imgCard .imgBody{padding:10px 12px 12px; color:var(--muted); font-size:13.5px; line-height:1.45}
+    @media (max-width:900px){ .imgCard{grid-column:span 12;} }
+
+    /* Callout upgrades */
+    .callout{
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- defs for gradient strokes (shared by all inline icons) -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="rgb(124,58,237)"/>
+        <stop offset="1" stop-color="rgb(34,211,238)"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <nav>
+    <div class="wrap">
+      <a href="#home">Home</a>
+      <a href="#rules">Rules</a>
+      <a href="#gbg">GBG</a>
+      <a href="#fighting">Fighting</a>
+      <a href="#attrition">Attrition</a>
+      <a href="#ge">GE</a>
+      <a href="#qi">QI</a>
+      <a href="#thread19">1.9 Thread</a>
+      <a href="#greatbuildings">Great Buildings</a>
+      <a href="#links">Links</a>
+      <a href="#members">Members</a>
+      <span class="pill">🏆 Competitive · 🤝 Team-Focused · 🌍 International</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="wrap hero">
+    <div class="heroCard">
+      <div class="heroMedia" aria-hidden="true"></div>
+
+      <div class="heroInner">
+        <div class="brandRow">
+          <img src="assets/limitless-emblem.png" alt="Limitless Guild Emblem" class="brandIcon">
+          <div class="brand">
+            <h1>Limitless</h1>
+            <p class="subtitle">Forge of Empires Guild Hub — <strong>Cirgard</strong></p>
+          </div>
+        </div>
+
+        <div class="heroBadges" aria-label="Guild badges">
+          <span class="badge">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M12 3l2.5 5 5.5.8-4 3.9.9 5.6-4.9-2.6-4.9 2.6.9-5.6-4-3.9 5.5-.8L12 3z"/></svg>
+            Competitive
+          </span>
+          <span class="badge">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M7 12l3 3 7-7"/><path class="stroke2" d="M4 7h4M4 17h4"/></svg>
+            Team-Focused
+          </span>
+          <span class="badge">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="stroke" d="M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9z"/><path class="stroke2" d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/></svg>
+            International
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr class="sep">
+  </header>
+
+  <main class="wrap" id="home">
+
+    <!-- WELCOME (QI removed) -->
+    <div class="card">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 3l8 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9l8-6z"/><path class="stroke2" d="M9.5 21V12h5v9"/></svg>
+        </span>
+        Welcome
+      </h2>
+      <p>
+        <strong>Limitless</strong> is an international, competitive, drama-free guild focused on
+        <strong>GBG</strong> and <strong>GE</strong>.
+        Real life comes first — communication matters.
+      </p>
+
+      <div class="grid">
+        <div class="col4">
+          <div class="callout">
+            <strong>Leadership & Roles</strong>
+            <div class="small" style="margin-top:6px">
+              <span class="tag found">👑 Founder</span>
+              <span class="tag lead">⭐ Leader</span>
+              <span class="tag gbg">⚔️ GBG Contact</span>
+            </div>
+            <p class="small" style="margin:8px 0 0">
+              GBG contacts: <strong>Long Shadow</strong>, <strong>KatsuChicken</strong>
+            </p>
+          </div>
+        </div>
+
+        <div class="col4">
+          <div class="callout">
+            <strong>Quick Links</strong>
+            <ul style="margin:8px 0 0 20px">
+              <li><a href="#fighting" style="color:#fff">Troop combos</a></li>
+              <li><a href="#attrition" style="color:#fff">Attrition guide</a></li>
+              <li><a href="#thread19" style="color:#fff">1.9 posting format</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col4">
+          <div class="callout">
+            <strong>How to stay in good standing</strong>
+            <ul style="margin:8px 0 0 20px">
+              <li>Help in GE weekly</li>
+              <li>Follow GBG calls + locks by the leaders</li>
+              <li>Use the 1.9 thread properly</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RULES -->
+    <div class="card" id="rules">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M7 4h10a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V6a2 2 0 0 1 2-2z"/><path class="stroke2" d="M8 8h8M8 12h8"/></svg>
+        </span>
+        Guild Rules (Simple)
+      </h2>
+
+      <div class="grid">
+        <div class="col6">
+          <h3>Culture</h3>
+          <ul>
+            <li>Be respectful — no drama, no ego.</li>
+            <li>Real life comes first. If you’ll be away, just tell leadership.</li>
+            <li>Keep chat helpful (questions welcome).</li>
+          </ul>
+        </div>
+        <div class="col6">
+          <h3>Contribution</h3>
+          <ul>
+            <li>GE: contruibute weekly.</li>
+            <li>GBG: follow calls and respect locks placed by leaders.</li>
+            <li>1.9 thread: follow the standard process (see 1.9 section).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Golden rule:</strong> If you’re unsure, ask a leader before acting — we’d rather answer than undo a mistake.
+      </div>
+    </div>
+
+    <!-- GBG -->
+    <div class="card" id="gbg">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/><path class="stroke2" d="M9 12l2 2 4-5"/></svg>
+        </span>
+        Guild Battlegrounds (GBG) — Beginner Guide
+      </h2>
+
+      <div class="sectionHead">
+        <div>
+          <p>
+            GBG is a team mode where guilds fight over sectors during an 11‑day round.
+            You don’t need to “know strategy” to help — just follow markers and call‑outs.
+          </p>
+        </div>
+      </div>
+
+      <div class="miniGrid">
+        <div class="mini">
+          <h4>Quick Start (what to do)</h4>
+          <ul>
+            <li>Open GBG and look for <strong>marked sectors</strong>.</li>
+            <li>Attack the sector(s) leadership indicates.</li>
+            <li>If unsure, <strong>ask</strong> before hitting random sectors.</li>
+            <li>Stop whenever you feel you’re losing too many units.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Important: Markers</h4>
+          <ul>
+            <li><strong>🎯 Target</strong> = attack this sector.</li>
+            <li><strong>✋ Hand</strong> = do <strong>not</strong> finish this sector (even if it’s nearly done). This may be a pinned sector.</li>
+            <li>Leaders may mark multiple sectors at once — follow the latest call‑outs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="miniGrid">
+        <div class="mini">
+          <h4>Trials (choose your difficulty)</h4>
+          <p>
+            When GBG starts you pick a <strong>Trial</strong>. You can change it any time.
+            Starting <strong>lower</strong> early usually helps the guild get more total fights.
+          </p>
+          <table>
+            <thead><tr><th>Lower Trial</th><th>Higher Trial</th></tr></thead>
+            <tbody>
+              <tr><td>Easier enemies</td><td>Harder enemies</td></tr>
+              <tr><td>More total fights</td><td>Fewer fights before attrition hurts</td></tr>
+              <tr><td>Lower rewards per fight</td><td>Higher rewards per fight</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mini">
+          <h4>Attrition (when fights get harder)</h4>
+          <p>
+            Normally, each battle has a <strong>100%</strong> chance to add 1 attrition.
+            With camps built, we can reduce attrition gain chance by up to <strong>80%</strong>.
+          </p>
+          <ul>
+            <li>At max reduction, sectors show <strong>20% chance</strong> of gaining attrition.</li>
+            <li>If you see <strong>20%</strong>, it’s usually a good time to have a go (even if leaders are offline).</li>
+            <li>Your safe attrition depends on your boosts and unit choice — stop before you start feeding units.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="imgRow">
+        <div class="imgCard">
+          <div class="imgTop">
+            <span class="tag neutral">🔴</span>
+            <strong>Red Shield = Attack sector</strong>
+          </div>
+          <div class="imgBody">
+            Red shield means your <strong>attacking army’s attack/boost</strong> matters most.
+          </div>
+          <img src="assets/gbg-red-shield.png" alt="GBG red shield (attack sector)">
+        </div>
+
+        <div class="imgCard">
+          <div class="imgTop">
+            <span class="tag neutral">🔵</span>
+            <strong>Blue Shield = Defense sector</strong>
+          </div>
+          <div class="imgBody">
+            Blue shield means your <strong>attacking army’s defense/boost</strong> matters most.
+          </div>
+          <img src="assets/gbg-blue-shield.png" alt="GBG blue shield (defense sector)">
+        </div>
+      </div>
+
+      <div class="miniGrid">
+        <div class="mini">
+          <h4>Other mechanics worth knowing</h4>
+          <ul>
+            <li><strong>Ownership colour:</strong> the colour of a sector <em>before</em> opening it shows which guild owns it.</li>
+            <li><strong>Lockout:</strong> once a sector is taken, it locks for <strong>4 hours</strong>.</li>
+            <li>Sectors have map labels (example: <strong>A1M</strong> is central; <strong>A4D</strong> is outer).</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Rewards</h4>
+          <p>GBG rewards include:</p>
+          <ul>
+            <li><strong>Battleground Coins</strong> (used in the GBG store)</li>
+            <li><strong>Forge Points</strong></li>
+            <li><strong>Goods</strong></li>
+          </ul>
+          <p class="small" style="margin-top:8px">
+            All members benefit when the guild performs well — personal rewards (extra FP/coins/goods) come from participation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIGHTING -->
+    <div class="card" id="fighting">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M14 3l7 7-3 3-7-7 3-3z"/><path class="stroke2" d="M2 22l6-2 3-3-4-4-3 3-2 6z"/></svg>
+        </span>
+        Fighting Guide (By Age)
+      </h2>
+
+      <p class="small">Expand your age to see recommended <strong>Attack</strong> and <strong>Defence</strong> combinations. Results depend on boosts and attrition.</p>
+
+      <!-- Iron Age -->
+      <details>
+        <summary><strong>Iron Age (IA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>8× Ballista</li>
+          <li>4× Ballista + 4× Rogues</li>
+          <li>2× Ballista + 6× Rogues (safer)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Ballista</li>
+          <li>6× Ballista + 2× Heavy Infantry</li>
+        </ul>
+      </details>
+
+      <!-- Early Middle Ages -->
+      <details>
+        <summary><strong>Early Middle Ages (EMA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Armored Infantry + 6× Rogues</li>
+          <li>1× Armored Infantry + 7× Rogues (higher attrition)</li>
+          <li>2× Catapult + 6× Rogues (map dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Catapult</li>
+          <li>6× Catapult + 2× Armored Infantry</li>
+        </ul>
+      </details>
+
+      <!-- High Middle Ages -->
+      <details>
+        <summary><strong>High Middle Ages (HMA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Champion + 6× Rogues</li>
+          <li>1× Champion + 7× Rogues (safer)</li>
+          <li>2× Trebuchet + 6× Rogues (vs heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Trebuchet</li>
+          <li>6× Trebuchet + 2× Heavy Infantry</li>
+        </ul>
+      </details>
+
+      <!-- Late Middle Ages -->
+      <details>
+        <summary><strong>Late Middle Ages (LMA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Imperial Guard + 6× Rogues</li>
+          <li>1× Imperial Guard + 7× Rogues (safer)</li>
+          <li>2× Heavy Knight + 6× Rogues (vs artillery-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Cannon</li>
+          <li>6× Cannon + 2× Imperial Guard</li>
+        </ul>
+      </details>
+
+      <!-- Colonial Age -->
+      <details>
+        <summary><strong>Colonial Age (CA)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Grenadier + 6× Rogues</li>
+          <li>1× Grenadier + 7× Rogues (safer)</li>
+          <li>2× Dragoon + 6× Rogues (vs artillery-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Field Gun</li>
+          <li>6× Field Gun + 2× Grenadier</li>
+        </ul>
+      </details>
+
+      <!-- Industrial Age -->
+      <details>
+        <summary><strong>Industrial Age (Indy)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Howitzer + 6× Rogues</li>
+          <li>1× Howitzer + 7× Rogues (safer)</li>
+          <li>2× Tank + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Howitzer</li>
+          <li>6× Howitzer + 2× Tank</li>
+        </ul>
+      </details>
+
+      <!-- Progressive Era -->
+      <details>
+        <summary><strong>Progressive Era (PE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>8× Rapid Fire Cannon (easy auto)</li>
+          <li>2× Tank + 6× Rogues (higher attrition)</li>
+          <li>2× Rapid Fire Cannon + 6× Rogues (terrain dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Rapid Fire Cannon</li>
+          <li>6× Rapid Fire Cannon + 2× Tank</li>
+        </ul>
+      </details>
+
+      <!-- Modern Era -->
+      <details>
+        <summary><strong>Modern Era (ME)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Battle Tank + 6× Rogues</li>
+          <li>1× Battle Tank + 7× Rogues (safer)</li>
+          <li>2× Mechanized Artillery + 6× Rogues (vs heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Mechanized Artillery</li>
+          <li>6× Mechanized Artillery + 2× Battle Tank</li>
+        </ul>
+      </details>
+
+      <!-- Postmodern Era -->
+      <details>
+        <summary><strong>Postmodern Era (PME)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× MG Team + 6× Rogues</li>
+          <li>1× MG Team + 7× Rogues (safer)</li>
+          <li>2× Assault Tank + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× MG Team</li>
+          <li>6× MG Team + 2× Assault Tank</li>
+        </ul>
+      </details>
+
+      <!-- Contemporary Era -->
+      <details>
+        <summary><strong>Contemporary Era (CE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Anti-Aircraft Vehicle + 6× Rogues</li>
+          <li>1× Anti-Aircraft Vehicle + 7× Rogues (safer)</li>
+          <li>2× Main Battle Tank + 6× Rogues (vs fast-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Anti-Aircraft Vehicle</li>
+          <li>6× Anti-Aircraft Vehicle + 2× Main Battle Tank</li>
+        </ul>
+      </details>
+
+      <!-- Tomorrow Era -->
+      <details>
+        <summary><strong>Tomorrow Era (TE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Stealth Tank + 6× Rogues</li>
+          <li>1× Stealth Tank + 7× Rogues (safer)</li>
+          <li>2× Combat Drone + 6× Rogues (map dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Stealth Tank</li>
+          <li>6× Stealth Tank + 2× Combat Drone</li>
+        </ul>
+      </details>
+
+      <!-- Future Era -->
+      <details>
+        <summary><strong>Future Era (FE)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Hover Tank + 6× Rogues</li>
+          <li>1× Hover Tank + 7× Rogues (higher attrition)</li>
+          <li>2× Drone Swarm + 6× Rogues (vs artillery-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Hover Tank</li>
+          <li>6× Hover Tank + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Arctic Future -->
+      <details>
+        <summary><strong>Arctic Future (AF)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Battle Fortress + 6× Rogues</li>
+          <li>1× Battle Fortress + 7× Rogues (safer)</li>
+          <li>2× Battle Fortress + 6× Rogues (manual often better)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Battle Fortress</li>
+          <li>6× Battle Fortress + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Oceanic Future -->
+      <details>
+        <summary><strong>Oceanic Future (OF)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Sub Cruiser + 6× Rogues</li>
+          <li>1× Sub Cruiser + 1× Turturret + 6× Rogues</li>
+          <li>8× Hydroelectric Eel (only if matchup favours it)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Sub Cruiser</li>
+          <li>6× Sub Cruiser + 2× Turturret</li>
+        </ul>
+      </details>
+
+      <!-- Virtual Future -->
+      <details>
+        <summary><strong>Virtual Future (VF)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Rocket Troop + 6× Rogues (safe auto)</li>
+          <li>1× Rocket Troop + 7× Rogues (safer)</li>
+          <li>2× Ronin Bot + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Rocket Troop</li>
+          <li>6× Rocket Troop + 2× Ronin Bot</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Mars -->
+      <details>
+        <summary><strong>Space Age Mars (SAM)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Sentinel + 6× Rogues</li>
+          <li>1× Sentinel + 7× Rogues (safer)</li>
+          <li>2× Sentinel + 6× Rogues (vs fast-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Sentinel</li>
+          <li>6× Sentinel + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Asteroid Belt -->
+      <details>
+        <summary><strong>Space Age Asteroid Belt (SAAB)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Nail Storm + 6× Rogues</li>
+          <li>1× Nail Storm + 7× Rogues (safer)</li>
+          <li>2× Nail Storm + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Nail Storm</li>
+          <li>6× Nail Storm + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Venus -->
+      <details>
+        <summary><strong>Space Age Venus (SAV)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Energy Cannon + 6× Rogues</li>
+          <li>1× Energy Cannon + 7× Rogues (safer)</li>
+          <li>2× Energy Cannon + 6× Rogues (matchup dependent)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Energy Cannon</li>
+          <li>6× Energy Cannon + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Jupiter Moon -->
+      <details>
+        <summary><strong>Space Age Jupiter Moon (SAJM)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Harpoon Grenadier + 6× Rogues</li>
+          <li>1× Harpoon Grenadier + 7× Rogues (safer)</li>
+          <li>2× Harpoon Grenadier + 6× Rogues (harder fights)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Harpoon Grenadier</li>
+          <li>6× Harpoon Grenadier + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Titan -->
+      <details>
+        <summary><strong>Space Age Titan (SAT)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Steel Warden + 6× Rogues (safe auto)</li>
+          <li>1× Steel Warden + 7× Rogues (higher attrition)</li>
+          <li>6–8× Steel Warden (vs fast-heavy)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Steel Warden</li>
+          <li>6× Steel Warden + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Space Age Space Hub -->
+      <details>
+        <summary><strong>Space Age Space Hub (SASH)</strong></summary>
+        <h3>Attack</h3>
+        <ul>
+          <li>2× Space Marine + 6× Rogues (safe auto)</li>
+          <li>1× Space Marine + 7× Rogues (higher attrition)</li>
+          <li>2× Space Marine + 4–6× Rogues (awkward maps)</li>
+        </ul>
+        <h3>Defence</h3>
+        <ul>
+          <li>8× Space Marine</li>
+          <li>6× Space Marine + 2× Rogues</li>
+        </ul>
+      </details>
+
+      <!-- Tips -->
+      <div class="grid" style="margin-top:14px">
+        <div class="col6">
+          <h3>Manual-fight tips (simple)</h3>
+          <ul>
+            <li>Focus-fire dangerous units first (enemy artillery/ranged).</li>
+            <li>Don’t sacrifice wounded units — keep them back.</li>
+            <li>Use cover/line-of-sight on tricky maps.</li>
+            <li>If your first two turns go bad, retreat and swap army.</li>
+          </ul>
+        </div>
+        <div class="col6">
+          <h3>Auto-battle safety tips</h3>
+          <ul>
+            <li>If you lose a unit twice in a row: consider stopping or going manual.</li>
+            <li>When fights start “costing” units, you’re near your safe attrition.</li>
+            <li>Once you are losing more than four units consistently, think about stopping.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTRITION -->
+    <div class="card" id="attrition">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 2l7 12-7 8-7-8 7-12z"/><path class="stroke2" d="M12 7v6M12 17h.01"/></svg>
+        </span>
+        Attrition Guide (When to Stop)
+      </h2>
+
+      <p>
+        Attrition is personal. The goal is to farm points without feeding units.
+        Your “safe” attrition depends on boosts, unit choice, and whether you manual-fight.
+      </p>
+
+      <div class="grid">
+        <div class="col6">
+          <h3>Easy rule of thumb</h3>
+          <div class="callout">
+            <ul style="margin:0 0 0 20px">
+              <li><strong>Keep going:</strong> you’re winning clean with minimal damage.</li>
+              <li><strong>Slow down:</strong> units are taking heavy hits or you’re replacing losses.</li>
+              <li><strong>Stop:</strong> stop before you start taking heavy losses.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col6">
+          <h3>Auto vs Manual</h3>
+          <ul>
+            <li><strong>Auto:</strong> fast and consistent, but can throw units away at higher attrition.</li>
+            <li><strong>Manual:</strong> takes longer, but pushes your safe attrition higher.</li>
+            <li><strong>Best method:</strong> auto until fights get rough, then manual key matchups.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GE -->
+    <div class="card" id="ge">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M4 20V6l8-3 8 3v14"/><path class="stroke2" d="M8 20V10h8v10"/></svg>
+        </span>
+        Guild Expedition (GE)
+      </h2>
+
+      <p>GE is our weekly baseline. The goal is reliable contribution — not stress.</p>
+
+      <div class="grid">
+        <div class="col6">
+          <h3>Targets</h3>
+          <table>
+            <thead><tr><th>Member type</th><th>Suggested weekly GE target</th></tr></thead>
+            <tbody>
+              <tr><td>Casual / building up</td><td>GE1–GE2 completion</td></tr>
+              <tr><td>Regular active</td><td>GE3 completion</td></tr>
+              <tr><td>Strong fighters</td><td>GE4 and GE5 completion</td></tr>
+            </tbody>
+          </table>
+          <p class="small">Leaders will not expect you to meet unrealistic expectations.</p>
+        </div>
+
+        <div class="col6">
+          <h3>Best practices</h3>
+          <ul>
+            <li>Use battles when efficient; negotiate when sensible.</li>
+            <li>Don’t burn your whole stockpile early — pace it.</li>
+            <li>If you’re stuck, ask for tips (buildings, boosts, unit choices).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <section id="qi" class="card">
+  <h2>
+    <span class="icon" aria-hidden="true">
+      <svg class="i" viewBox="0 0 24 24">
+        <path class="stroke" d="M12 3l7 7-7 11L5 10l7-7z"/>
+        <path class="stroke2" d="M12 3v18"/>
+      </svg>
+    </span>
+    
+    Quantum Incursions (QI)
+  </h2>
+
+  <p>
+    QI is a <strong>side mode</strong> for us right now — our main focus is still <strong>GBG</strong> and <strong>GE</strong>.
+    That said, we’ve got some seriously strong QI players in Limitless, and we <strong>do</strong> want to support anyone who enjoys it.
+  </p>
+
+  <div class="grid">
+    <div class="col6">
+      <h3>How we approach QI</h3>
+      <ul>
+        <li><strong>No strict expectations</strong> (no sector calling / no “must-hit” rules at this stage).</li>
+        <li>Play your own style — fighting, negotiating, or building economy.</li>
+        <li>Ask questions in chat if you want help optimising your QI city.</li>
+      </ul>
+    </div>
+
+    <div class="col6">
+      <h3>“I don’t play much — can I still help?”</h3>
+      <p class="small" style="margin:0">
+        Yep. Even casual players can contribute in a meaningful way:
+      </p>
+      <ul>
+        <li>Drop a few <strong>simple supply buildings</strong> in your QI city.</li>
+        <li>Collect when you can.</li>
+        <li>Donate your <strong>supplies / goods</strong> into the guild pool.</li>
+      </ul>
+      <p class="small" style="margin:0">
+        Small, consistent donations add up fast — especially from members who don’t have time to fully play the mode.
+      </p>
+    </div>
+  </div>
+
+  <hr class="sep" />
+
+  <h3>Optional QI Guide (for anyone who wants it)</h3>
+
+  <div class="resourceCard">
+    <div>
+      <div class="resourceTitle">The Alchemist — Middle Ages — Fighter (Guide)</div>
+      <div class="resourceMeta">
+        Optional resource • for people who want to push QI harder • not compulsory
+      </div>
+    </div>
+
+    <div class="resourceActions">
+      <a class="btn" href="assets/qi-alchemist-middleages-fighter.pdf" target="_blank" rel="noopener">
+        View
+      </a>
+      <a class="btn btnPrimary" href="assets/qi-alchemist-middleages-fighter.pdf" download>
+        Download
+      </a>
+    </div>
+  </div>
+
+  <p class="small" style="margin-top:10px">
+    If you’re one of our QI grinders: legend. If you’re casual: still valuable. Either way, you’re welcome here.
+  </p>
+</section>
+
+    <!-- 1.9 THREAD -->
+    <div class="card" id="thread19">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M7 7h10v14H7z"/><path class="stroke2" d="M9 3h6v4H9zM9 11h6M9 15h6"/></svg>
+        </span>
+        1.9 Thread (How to Post)
+      </h2>
+
+      <p>
+        Post your Great Building with <strong>available spots only</strong>.
+        Spots are written from <strong>P5</strong> down to <strong>P1</strong>.
+        This is intentional — <strong>P1 is taken first</strong>.
+      </p>
+
+      <h3>Why this format is used</h3>
+      <p>
+        Because Spot 1 is taken first, its placed last. That way, as spots are taken,
+        you only need to delete the <strong>end positon</strong> each time.
+      </p>
+
+      <h3>Example — Correct Format</h3>
+      <pre class="code-block">Name – Observatory (Great building) P5 (19) P4 (95) P3 (371) P2 (1102) P1 (2204)</pre>
+
+      <h3>As Spots Are Taken</h3>
+      <pre class="code-block">Name – Observatory (Great building) P5 (19) P4 (95) P3 (371) P2 (1102)</pre>
+
+      <h3>When Finished</h3>
+      <ul>
+        <li>When all spots are taken, write <strong>Clear</strong> or <strong>X</strong>.</li>
+      </ul>
+    </div>
+
+
+    <!-- GREAT BUILDINGS -->
+    <div class="card" id="greatbuildings">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M12 2l8 6v14H4V8l8-6z"/><path class="stroke2" d="M9 22V12h6v10"/></svg>
+        </span>
+        Great Buildings (Guide)
+      </h2>
+
+      <p class="small">
+        Great Buildings are a long-term investment. This guide groups them by general community agreement.
+        Click a category, then click a building for details.
+      </p>
+
+      <div class="callout" style="margin-top:10px">
+        <strong>Badges</strong>
+        <div class="small" style="margin-top:6px">
+          <span class="tag good">🟢 Widely Agreed</span>
+          <span class="tag warn">🟡 Mixed Opinions</span>
+          <span class="tag gbg">🔵 Late-Game Focus</span>
+        </div>
+        <p class="small" style="margin:8px 0 0">
+          Your best choices still depend on how you play (fighting, quests, goods, or a mix).
+        </p>
+      </div>
+
+      <details open>
+        <summary><strong>⭐ Core / Must-Have</strong> <span class="tag good" style="margin-left:8px">🟢 Widely Agreed</span></summary>
+
+        <details>
+          <summary><strong>Statue of Zeus</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Increases attack boost for your attacking army.</p>
+          <p class="small"><strong>Why it’s here:</strong> Very strong early combat value for the space. Useful for fighting in every era.</p>
+        </details>
+
+        <details>
+          <summary><strong>Cathedral of Aachen</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Increases attack boost for your attacking army.</p>
+          <p class="small"><strong>Why it’s here:</strong> A reliable combat boost that stays useful long-term.</p>
+        </details>
+
+        <details>
+          <summary><strong>Castel del Monte</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces Forge Points and increases attack boost for your attacking army.</p>
+          <p class="small"><strong>Why it’s here:</strong> One of the best all-round buildings: Forge Points + combat in one place.</p>
+        </details>
+
+        <details>
+          <summary><strong>The Arc</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Increases rewards from contributing Forge Points to other players’ Great Buildings.</p>
+          <p class="small"><strong>Why it’s here:</strong> Greatly improves your Forge Point income through 1.9 threads and supports faster progress.</p>
+        </details>
+
+        <details>
+          <summary><strong>Arctic Orangery</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Gives a chance for critical hits in combat.</p>
+          <p class="small"><strong>Why it’s here:</strong> One of the strongest combat boosts for players who fight often.</p>
+        </details>
+
+        <details>
+          <summary><strong>The Blue Galaxy</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Can double the output of selected buildings each day (limited uses).</p>
+          <p class="small"><strong>Why it’s here:</strong> Very strong once you have good production buildings to double (Forge Points, goods, etc.).</p>
+        </details>
+
+        <details>
+          <summary><strong>Château Frontenac</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Increases rewards from quests.</p>
+          <p class="small"><strong>Why it’s here:</strong> Excellent for players who complete quests regularly (events, daily quests, recurring quests).</p>
+        </details>
+      </details>
+
+      <details>
+        <summary><strong>✅ Strong / High-Value</strong></summary>
+
+        <details>
+          <summary><strong>Alcatraz</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides happiness and produces unattached military units each day.</p>
+          <p class="small"><strong>Why it’s here:</strong> Helps you fight more by giving free units without needing to train as many.</p>
+        </details>
+
+        <details>
+          <summary><strong>Himeji Castle</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces supplies and has a chance to give rewards when you win battles.</p>
+          <p class="small"><strong>Why it’s here:</strong> Strong long-term value for active fighters.</p>
+        </details>
+
+        <details>
+          <summary><strong>Seed Vault</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Gives rewards when you help other players (can include goods, Forge Points, medals, and diamonds).</p>
+          <p class="small"><strong>Why it’s here:</strong> Helpful for active players, but value depends on daily activity and level.</p>
+        </details>
+
+        <details>
+          <summary><strong>Terracotta Army</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Increases attack and defence for your attacking army.</p>
+          <p class="small"><strong>Why it’s here:</strong> A solid combat boost, but many players build it later (after the smaller combat buildings).</p>
+        </details>
+
+        <details>
+          <summary><strong>The Kraken</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces Forge Points and can sometimes give extra Forge Points.</p>
+          <p class="small"><strong>Why it’s here:</strong> Can be good, but the extra reward is not guaranteed.</p>
+        </details>
+
+        <details>
+          <summary><strong>Cape Canaveral</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces Forge Points.</p>
+          <p class="small"><strong>Why it’s here:</strong> Reliable, but large and often replaced later by strong event buildings.</p>
+        </details>
+
+        <details>
+          <summary><strong>Innovation Tower</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides population and produces Forge Points.</p>
+          <p class="small"><strong>Why it’s here:</strong> Useful mid-game when population is tight. Less important later.</p>
+        </details>
+
+        <details>
+          <summary><strong>Temple of Relics</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Gives relic rewards from Guild Expeditions.</p>
+          <p class="small"><strong>Why it’s here:</strong> Helpful for players who complete GE regularly. Less useful if you do little GE.</p>
+        </details>
+      </details>
+
+      <details>
+        <summary><strong>⚖️ Situational / Playstyle-Dependent</strong></summary>
+
+        <details>
+          <summary><strong>Tower of Babel</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides population and produces goods.</p>
+          <p class="small"><strong>Why it’s here:</strong> Helps early cities, but often removed later.</p>
+        </details>
+
+        <details>
+          <summary><strong>Lighthouse of Alexandria</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces supplies and boosts supply production.</p>
+          <p class="small"><strong>Why it’s here:</strong> Helpful early, but less needed once your city has strong supply sources.</p>
+        </details>
+
+        <details>
+          <summary><strong>Galata Tower</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces goods and increases defence for your defending army.</p>
+          <p class="small"><strong>Why it’s here:</strong> Goods can help early and mid-game, but defence is usually lower priority than attack.</p>
+        </details>
+
+        <details>
+          <summary><strong>St. Mark’s Basilica</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces coins and boosts coin production.</p>
+          <p class="small"><strong>Why it’s here:</strong> Coins are rarely a long-term problem, so many players skip it later.</p>
+        </details>
+
+        <details>
+          <summary><strong>Truce Tower</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces goods and boosts goods gained from helping other players.</p>
+          <p class="small"><strong>Why it’s here:</strong> Useful for active helpers and traders. Less useful for combat-first cities.</p>
+        </details>
+
+        <details>
+          <summary><strong>Atomium</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Increases quest rewards (Forge Points and other rewards).</p>
+          <p class="small"><strong>Why it’s here:</strong> Strong for quest-focused players, not important for everyone.</p>
+        </details>
+      </details>
+
+      <details>
+        <summary><strong>🔵 Late-Game Focus</strong> <span class="tag gbg" style="margin-left:8px">🔵 Late-Game Focus</span></summary>
+
+        <details>
+          <summary><strong>Saturn VI Gate PEGASUS</strong> <span class="tag gbg">🔵 Late-Game Focus</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides Titan-era bonuses.</p>
+          <p class="small"><strong>Why it’s here:</strong> High Forge Point and resource cost. Best for advanced cities.</p>
+        </details>
+
+        <details>
+          <summary><strong>Saturn VI Gate CENTAURUS</strong> <span class="tag gbg">🔵 Late-Game Focus</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides Titan-era bonuses.</p>
+          <p class="small"><strong>Why it’s here:</strong> Very expensive to level. Best as a long-term project.</p>
+        </details>
+
+        <details>
+          <summary><strong>Saturn VI Gate HYDRA</strong> <span class="tag gbg">🔵 Late-Game Focus</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides Titan-era combat-related bonuses.</p>
+          <p class="small"><strong>Why it’s here:</strong> High cost for most players. Optional even in late game.</p>
+        </details>
+
+        <details>
+          <summary><strong>Stellar Warship</strong> <span class="tag gbg">🔵 Late-Game Focus</span></summary>
+          <p class="small"><strong>What it does:</strong> Improves combat performance and produces Space Hub units.</p>
+          <p class="small"><strong>Why it’s here:</strong> Designed for advanced, combat-heavy cities. High investment.</p>
+        </details>
+
+        <details>
+          <summary><strong>Cosmic Catalyst</strong> <span class="tag gbg">🔵 Late-Game Focus</span></summary>
+          <p class="small"><strong>What it does:</strong> Improves combat outcomes and supports guild-focused rewards.</p>
+          <p class="small"><strong>Why it’s here:</strong> Useful for organised end-game play, but costly to level.</p>
+        </details>
+      </details>
+
+      <details>
+        <summary><strong>⚠️ Generally Avoided / Low Priority</strong></summary>
+
+        <details>
+          <summary><strong>Oracle of Delphi</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces happiness and supplies.</p>
+          <p class="small"><strong>Why it’s here:</strong> Weak long-term value. Usually removed early.</p>
+        </details>
+
+        <details>
+          <summary><strong>Colosseum</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides happiness and medals.</p>
+          <p class="small"><strong>Why it’s here:</strong> Large size for limited benefit. Commonly skipped.</p>
+        </details>
+
+        <details>
+          <summary><strong>Notre Dame</strong> <span class="tag good">🟢 Widely Agreed</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces happiness.</p>
+          <p class="small"><strong>Why it’s here:</strong> Happiness is easy to cover later. Commonly skipped.</p>
+        </details>
+
+        <details>
+          <summary><strong>Space Needle</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Produces coins.</p>
+          <p class="small"><strong>Why it’s here:</strong> Coins are rarely a long-term problem. Many players do not keep it.</p>
+        </details>
+
+        <details>
+          <summary><strong>Lotus Temple</strong> <span class="tag warn">🟡 Mixed Opinions</span></summary>
+          <p class="small"><strong>What it does:</strong> Provides population.</p>
+          <p class="small"><strong>Why it’s here:</strong> Population is usually covered by event buildings later.</p>
+        </details>
+      </details>
+
+      <p class="small" style="margin-top:12px">
+        If you want advice for your specific city (fighting, Forge Points, goods), ask in guild chat — different ages and boosts can change what is best.
+      </p>
+    </div>
+    <!-- LINKS -->
+    <div class="card" id="links">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1"/><path class="stroke2" d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 0 1-7-7l1-1"/></svg>
+        </span>
+        Useful Links
+      </h2>
+
+      <p class="small">Quick tools that help with planning, Great Buildings, and general reference.</p>
+
+      <details open>
+        <summary>Tools & planners</summary>
+        <ul>
+          <li><a href="https://foe.tools/" target="_blank" rel="noopener">FOE Tools</a> <span class="small">— GB cost & reward calculators.</span></li>
+          <li><a href="https://foe-helper.com/" target="_blank" rel="noopener">FOE Helper</a> <span class="small">— browser extension with QoL tools.</span></li>
+          <li><a href="https://foe-city-builder.web.app/#/" target="_blank" rel="noopener">FOE City Planner</a> <span class="small">— optimise city layouts.</span></li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Reference</summary>
+        <ul>
+          <li><a href="https://forgeofempires.fandom.com/" target="_blank" rel="noopener">FOE Wiki</a> <span class="small">— units, ages, mechanics.</span></li>
+          <li><a href="https://www.mooingcatguides.com/" target="_blank" rel="noopener">MooingCat Guides</a> <span class="small">— clear FOE guides.</span></li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- MEMBERS -->
+    <div class="card" id="members">
+      <h2>
+        <span class="icon" aria-hidden="true">
+          <svg class="i" viewBox="0 0 24 24"><path class="stroke" d="M16 11a4 4 0 1 0-8 0"/><path class="stroke2" d="M4 21a8 8 0 0 1 16 0"/><path class="stroke2" d="M12 13a5 5 0 0 1 5 5"/></svg>
+        </span>
+        Members — Cirgard
+      </h2>
+
+      <p>
+        <span class="tag found">👑 Founder</span>
+        <span class="tag lead">⭐ Leader</span>
+        <span class="tag gbg">⚔️ GBG Contact</span>
+      </p>
+
+      <table aria-label="Member list">
+        <thead>
+          <tr><th>Member</th><th>Role</th></tr>
+        </thead>
+        <tbody id="memberRows"></tbody>
+      </table>
+    </div>
+
+    <footer class="siteFooter">
+  <a
+    href="https://discord.gg/5nZMpHSr"
+    target="_blank"
+    rel="noopener"
+    class="discordLink"
+    aria-label="Join Limitless on Discord"
+    title="Join Limitless on Discord"
+  >
+    <img src="assets/discord.svg" alt="Discord">
+  </a>
+
+  <div class="footerText">
+    © <span id="year"></span> Limitless — Cirgard
+  </div>
+</footer>
+  </main>
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // active nav highlighting
+    const navLinks = [...document.querySelectorAll("nav a[href^='#']")];
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    const setActive = (id) => {
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
+    };
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) setActive(e.target.id || "home");
+      });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
+
+    sections.forEach(s => obs.observe(s));
+
+
+    // Members + flags
+    // Note: England flags replaced with 🇬🇧 to avoid the "black flag" emoji rendering issue on Windows/Chrome.
+    const members = [
+      {name:"KatsuChicken",flag:"🇦🇺",role:"founder gbg"},
+      {name:"Brt the bright",flag:"🇬🇧",role:"founder"},
+      {name:"Foundation",flag:"🇬🇧",role:"founder"},
+      {name:"Variety the Great",flag:"🇬🇧",role:"founder"},
+      {name:"Long Shadow",flag:"🇦🇺",role:"leader gbg"},
+      {name:"Sainampueng",flag:"🇹🇭",role:"leader"},
+      {name:"SmartJjjjj",flag:"🇨🇦",role:"leader"},
+      {name:"AniMee1",flag:"🇮🇳",role:""},
+      {name:"BKONE",flag:"🇮🇳",role:""},
+      {name:"crazylad",flag:"🇬🇧",role:""},
+      {name:"dilan h",flag:"🇧🇬",role:""},
+      {name:"LuckyJoe",flag:"🇦🇺",role:""},
+      {name:"mightyMJK",flag:"🇫🇮",role:""},
+      {name:"Olapeacy",flag:"🇬🇧",role:""},
+      {name:"Thotsakan",flag:"🇹🇭",role:""},
+    ];
+
+    function badges(role){
+      const b=[];
+      if(role.includes("founder")) b.push('<span class="tag found">👑 Founder</span>');
+      if(role.includes("leader"))  b.push('<span class="tag lead">⭐ Leader</span>');
+      if(role.includes("gbg"))     b.push('<span class="tag gbg">⚔️ GBG Contact</span>');
+      return b.join(" ") || "—";
+    }
+
+  // ---- SORTING (Katsu pinned top + manual pins + role tiers) ----
+const key = s => String(s || "").trim().toLowerCase();
+
+// 0 = highest priority
+const manualPriority = {
+  [key("KatsuChicken")]: 0,     // <-- PINNED TOP
+  [key("Brt the bright")]: 1,
+  [key("Foundation")]: 2,
+  [key("Variety the Great")]: 3,
+};
+
+const priority = name => manualPriority[key(name)] ?? 99;
+
+const rank = role => {
+  const r = String(role || "").toLowerCase().trim();
+  const hasFounder = r.includes("founder");
+  const hasLeader  = r.includes("leader");
+
+  // Founder(+others) > Founder-only > Leader(+others) > Leader-only > Members
+  if (hasFounder && r !== "founder") return 0;
+  if (hasFounder)                    return 1;
+  if (hasLeader  && r !== "leader")  return 2;
+  if (hasLeader)                     return 3;
+  return 4;
+};
+
+const gbgBoost = role =>
+  String(role || "").toLowerCase().includes("gbg") ? 0 : 1;
+
+members.sort((a, b) => {
+  // 1) hard pins (Katsu first)
+  const pa = priority(a.name), pb = priority(b.name);
+  if (pa !== pb) return pa - pb;
+
+  // 2) role tiers
+  const ra = rank(a.role), rb = rank(b.role);
+  if (ra !== rb) return ra - rb;
+
+  // 3) GBG boost inside tier
+  const ga = gbgBoost(a.role), gb = gbgBoost(b.role);
+  if (ga !== gb) return ga - gb;
+
+  // 4) A–Z
+  return a.name.localeCompare(b.name);
+});
+
+    document.getElementById("memberRows").innerHTML =
+      members.map(m => `
+        <tr>
+          <td style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:18px">${m.flag || "🌍"}</span>
+            <span>${m.name}</span>
+          </td>
+          <td>${badges(m.role)}</td>
+        </tr>
+      `).join("");
+
+    // active nav highlighting (nice touch, no content change)
+    const navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
+    const setActive = () => {
+      const y = window.scrollY + 120;
+      let current = sections[0]?.id || "home";
+      for (const s of sections){
+        if (s.offsetTop <= y) current = s.id;
+      }
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
+    };
+    window.addEventListener("scroll", setActive, {passive:true});
+    window.addEventListener("load", setActive);
+  </script>
+</body>
+</html>
