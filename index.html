@@ -452,22 +452,53 @@
     .mini ul{margin:8px 0 0 18px; color:var(--muted); line-height:1.55}
     @media (max-width:900px){ .mini{grid-column:span 12;} }
 
-    /* Image card (for GBG shields) */
-    .imgRow{display:grid; grid-template-columns:repeat(12,1fr); gap:12px; margin-top:10px}
-    .imgCard{
-      grid-column:span 6;
-      border-radius:calc(var(--radius) - 4px);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.14);
-      overflow:hidden;
-    }
-    .imgCard .imgTop{display:flex; align-items:center; gap:10px; padding:12px 12px 8px}
-    .imgCard .imgTop strong{color:#fff}
     
-    .imgCard .imgBody{padding:10px 12px 12px; color:var(--muted); font-size:13.5px; line-height:1.45}
-    @media (max-width:900px){ .imgCard{grid-column:span 12;} }
+/* Image card (GBG shields) */
+.imgRow{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
 
-    /* Callout upgrades */
+.imgCard{
+  overflow:hidden;
+  border-radius:16px;
+  width:100%;
+}
+
+.imgCard img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  border-top:1px solid rgba(255,255,255,.08);
+  transition:transform .4s ease;
+}
+
+/* Slight zoom on hover (desktop only) */
+@media (hover:hover){
+  .imgCard:hover img{
+    transform:scale(1.03);
+  }
+}
+
+/* Mobile tuning */
+@media (max-width:900px){
+  .imgCard img{
+    height:190px;
+    object-position:left 30% top 20%;
+  }
+}
+
+/* Small phone tuning */
+@media (max-width:600px){
+  .imgCard img{
+    height:170px;
+  }
+}
+
+/* Callout upgrades */
     .callout{
       background: rgba(0,0,0,.16);
       border: 1px solid rgba(255,255,255,.10);
