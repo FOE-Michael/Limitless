@@ -1610,24 +1610,6 @@
     // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // active nav highlighting
-    const navLinks = [...document.querySelectorAll("nav a[href^='#']")];
-    const sections = navLinks
-      .map(a => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
-
-    const setActive = (id) => {
-      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
-    };
-
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) setActive(e.target.id || "home");
-      });
-    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
-
-    sections.forEach(s => obs.observe(s));
-
 
     // Members + flags
     // Note: England flags replaced with 🇬🇧 to avoid the "black flag" emoji rendering issue on Windows/Chrome.
@@ -1715,7 +1697,7 @@ members.sort((a, b) => {
       `).join("");
 
     // active nav highlighting (nice touch, no content change)
-    const navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
+    let navLinks = [...document.querySelectorAll('nav a[href^="#"]')];
     const sections = navLinks.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
     const setActive = () => {
